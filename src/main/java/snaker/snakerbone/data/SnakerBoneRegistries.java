@@ -87,7 +87,7 @@ public class SnakerBoneRegistries {
      * Biomes
      **/
     public static final String SHADER_HILLS = "shader_hills";
-    public static final String SHADER_PLAINS = "shader_plains.json";
+    public static final String SHADER_PLAINS = "shader_plains";
 
     /**
      * Dimensions
