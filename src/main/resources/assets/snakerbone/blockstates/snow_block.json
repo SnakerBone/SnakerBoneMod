@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "snakerbone:block/snow_block"
+    }
+  }
+}

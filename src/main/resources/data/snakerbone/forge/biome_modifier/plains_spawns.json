@@ -1,0 +1,18 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "plains",
+  "spawners": [
+    {
+      "type": "snakerbone:glider",
+      "weight": 35,
+      "minCount": 2,
+      "maxCount": 4
+    },
+    {
+      "type": "snakerbone:flutterfly",
+      "weight": 35,
+      "minCount": 2,
+      "maxCount": 4
+    }
+  ]
+}

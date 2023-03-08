@@ -1,0 +1,24 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "sunflower_plains",
+  "spawners": [
+    {
+      "type": "snakerbone:glider",
+      "weight": 35,
+      "minCount": 2,
+      "maxCount": 4
+    },
+    {
+      "type": "snakerbone:flutterfly",
+      "weight": 35,
+      "minCount": 2,
+      "maxCount": 4
+    },
+    {
+      "type": "snakerbone:utterfly",
+      "weight": 100,
+      "minCount": 1,
+      "maxCount": 2
+    }
+  ]
+}

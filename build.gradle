@@ -1,0 +1,205 @@
+buildscript {
+
+    dependencies {
+
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+
+    }
+}
+
+plugins {
+
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+version = mc_version + "-" + mod_version
+group = maven_group
+archivesBaseName = mod_id
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+repositories {
+
+    maven {
+
+        name 'CurseMaven'
+
+        url "https://cursemaven.com"
+
+    }
+
+    maven {
+
+        name 'GeckoLib'
+
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven'
+
+    }
+
+    maven {
+
+        name 'Covers1624'
+
+        url 'https://maven.covers1624.net'
+
+    }
+}
+
+dependencies {
+
+    minecraft 'net.minecraftforge:forge:1.19.2-43.2.0'
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    // curse.maven:<name>-<project_id>:<file_ids>
+    implementation fg.deobf('curse.maven:shutup-experimental-settings-407174:3759881')
+    // implementation fg.deobf('curse.maven:the-one-probe-245211:3965693')
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.19:3.1.40')
+    implementation fg.deobf('codechicken:CodeChickenLib:1.19.2-4.3.1.+:universal')
+    implementation fg.deobf('com.github.glitchfiend:TerraBlender-forge:1.19-2.0.0.119')
+
+    compileOnly 'com.brandon3055.draconicevolution:Draconic-Evolution:1.18.2-3.0.28.523:universal'
+    compileOnly 'com.brandon3055.brandonscore:BrandonsCore:1.18.2-3.1.9.280:universal'
+
+}
+
+minecraft {
+
+    mappings channel: 'official', version: mc_version
+
+    runs {
+
+        client {
+
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'snakerbone'
+
+            mods {
+
+                snakerbone {
+
+                    source sourceSets.main
+
+                }
+            }
+        }
+
+        server {
+
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'snakerbone'
+
+            mods {
+
+                snakerbone {
+
+                    source sourceSets.main
+
+                }
+            }
+        }
+
+        gameTestServer {
+
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'snakerbone'
+
+            mods {
+
+                snakerbone {
+
+                    source sourceSets.main
+
+                }
+            }
+        }
+
+        data {
+
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'snakerbone', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+
+                snakerbone {
+
+                    source sourceSets.main
+
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources {
+
+    srcDir 'src/generated/resources'
+
+}
+
+jar {
+
+    manifest {
+
+        attributes([
+
+                "Specification-Title"  : mod_title,
+                "Specification-Vendor" : mod_author,
+                "Specification-Version": mod_version
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+
+    publications {
+
+        mavenJava(MavenPublication) {
+
+            artifact jar
+
+        }
+    }
+
+    repositories {
+
+        maven {
+
+            url "file://${project.projectDir}/snakerbone"
+
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+
+    options.encoding = 'UTF-8'
+
+}

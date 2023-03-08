@@ -1,0 +1,121 @@
+{
+  "confuse": {
+    "subtitle": "sounds.snakerbone.confuse",
+    "sounds": [
+      "snakerbone:yn/confuse"
+    ]
+  },
+  "earth": {
+    "subtitle": "sounds.snakerbone.earth",
+    "sounds": [
+      "snakerbone:yn/earth"
+    ]
+  },
+  "fog": {
+    "subtitle": "sounds.snakerbone.fog",
+    "sounds": [
+      "snakerbone:yn/fog"
+    ]
+  },
+  "gaze": {
+    "subtitle": "sounds.snakerbone.gaze",
+    "sounds": [
+      "snakerbone:yn/gaze"
+    ]
+  },
+  "night": {
+    "subtitle": "sounds.snakerbone.night",
+    "sounds": [
+      "snakerbone:yn/night"
+    ]
+  },
+  "utterfly_shoot": {
+    "subtitle": "sounds.snakerbone.utterfly_shoot",
+    "sounds": [
+      "snakerbone:utterfly/shoot"
+    ]
+  },
+  "utterfly_ambient": {
+    "subtitle": "sounds.snakerbone.utterfly_ambient",
+    "sounds": [
+      {
+        "name": "snakerbone:yn/poison"
+      }
+    ]
+  },
+  "flutterfly_ambient": {
+    "subtitle": "sounds.snakerbone.flutterfly_ambient",
+    "sounds": [
+      {
+        "name": "snakerbone:yn/poison",
+        "pitch": 2
+      }
+    ]
+  },
+  "snipe_ambient": {
+    "subtitle": "sounds.snakerbone.snipe_ambient",
+    "sounds": [
+      "snakerbone:snipe/ambient"
+    ]
+  },
+  "snipe_hurt": {
+    "subtitle": "sounds.snakerbone.snipe_hurt",
+    "sounds": [
+      "snakerbone:snipe/hurt"
+    ]
+  },
+  "cosmo_hurt": {
+    "subtitle": "sounds.snakerbone.cosmo_hurt",
+    "sounds": [
+      {
+        "name": "snakerbone:cosmo/hurt1",
+        "volume": 0.5
+      },
+      {
+        "name": "snakerbone:cosmo/hurt2",
+        "volume": 0.5
+      },
+      {
+        "name": "snakerbone:cosmo/hurt3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "entity_death": {
+    "subtitle": "sounds.snakerbone.entity_death",
+    "sounds": [
+      "snakerbone:yn/dark"
+    ]
+  },
+  "ting": {
+    "subtitle": "sounds.snakerbone.ting",
+    "sounds": [
+      {
+        "name": "minecraft:random/anvil_land",
+        "pitch": 2,
+        "volume": 0.5
+      }
+    ]
+  },
+  "bullet": {
+    "subtitle": "sounds.snakerbone.bullet",
+    "sounds": [
+      "snakerbone:misc/bullet0",
+      "snakerbone:misc/bullet1",
+      "snakerbone:misc/bullet2",
+      "snakerbone:misc/bullet3",
+      "snakerbone:misc/bullet4",
+      "snakerbone:misc/bullet5",
+      "snakerbone:misc/bullet6",
+      "snakerbone:misc/bullet7",
+      "snakerbone:misc/bullet8",
+      "snakerbone:misc/bullet9",
+      "snakerbone:misc/bullet10",
+      "snakerbone:misc/bullet11",
+      "snakerbone:misc/bullet12",
+      "snakerbone:misc/bullet13",
+      "snakerbone:misc/bullet14",
+      "snakerbone:misc/bullet15"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+# Blender 3.4.1 MTL File: 'katana.blend'
+# www.blender.org
+
+newmtl black
+map_Kd snakerbone:model/base
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Kd 0.009018 0.009018 0.009018
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.000000
+illum 1
+
+newmtl black2
+map_Kd snakerbone:model/base
+Ns 488.235260
+Ka 0.533333 0.533333 0.533333
+Kd 0.029099 0.029099 0.029099
+Ks 0.633333 0.633333 0.633333
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.000000
+illum 6
+
+newmtl white
+map_Kd snakerbone:model/base_white
+Ns 37.254898
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.000000
+illum 1
