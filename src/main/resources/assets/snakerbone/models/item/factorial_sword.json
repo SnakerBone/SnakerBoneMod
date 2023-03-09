@@ -2,5 +2,5 @@
   "parent": "snakerbone:item/obj",
   "loader": "forge:obj",
   "flip_v": true,
-  "model" : "snakerbone:models/item/obj/factorial_sword.obj"
+  "model" : "snakerbone:models/item/blender/factorial_sword.obj"
 }
