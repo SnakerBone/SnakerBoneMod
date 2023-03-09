@@ -12,6 +12,7 @@ plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 
 }
 
@@ -58,19 +59,16 @@ dependencies {
 
     // curse.maven:<name>-<project_id>:<file_ids>
     implementation fg.deobf('curse.maven:shutup-experimental-settings-407174:3759881')
-    // implementation fg.deobf('curse.maven:the-one-probe-245211:3965693')
+    implementation fg.deobf('curse.maven:the-one-probe-245211:3965693')
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.19:3.1.40')
     implementation fg.deobf('codechicken:CodeChickenLib:1.19.2-4.3.1.+:universal')
     implementation fg.deobf('com.github.glitchfiend:TerraBlender-forge:1.19-2.0.0.119')
-
-    compileOnly 'com.brandon3055.draconicevolution:Draconic-Evolution:1.18.2-3.0.28.523:universal'
-    compileOnly 'com.brandon3055.brandonscore:BrandonsCore:1.18.2-3.1.9.280:universal'
 
 }
 
 minecraft {
 
-    mappings channel: 'official', version: mc_version
+    mappings channel: 'parchment', version: '2022.08.14-1.19.2'
 
     runs {
 
