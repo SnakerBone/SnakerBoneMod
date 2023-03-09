@@ -5,6 +5,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Created by SnakerBone on 20/02/2023
@@ -49,5 +50,23 @@ public class SnakerBoneTools {
         if (Minecraft.getInstance().isPaused()) return;
 
         ticksElapsed++;
+    }
+
+    public static UUID generateUUID(String name) {
+
+        return UUID.fromString(name);
+
+    }
+
+    public static UUID generateUUIDFromBytes(String name) {
+
+        return UUID.nameUUIDFromBytes(name.getBytes());
+
+    }
+
+    public static UUID generateRadomUUID() {
+
+        return UUID.randomUUID();
+
     }
 }
