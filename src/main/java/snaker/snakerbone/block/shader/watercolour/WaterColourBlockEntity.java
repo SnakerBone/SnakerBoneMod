@@ -1,8 +1,12 @@
 package snaker.snakerbone.block.shader.watercolour;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import snaker.snakerbone.registry.SnakerBoneContentRegistry;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -19,7 +23,6 @@ import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_
  **/
 @SuppressWarnings(CUSTOM_SET)
 public class WaterColourBlockEntity extends BlockEntity implements IAnimatable {
-
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
     public WaterColourBlockEntity(BlockPos pos, BlockState state) {
@@ -34,6 +37,14 @@ public class WaterColourBlockEntity extends BlockEntity implements IAnimatable {
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> entity) {
 
         return PlayState.CONTINUE;
+
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+
+        return ClientboundBlockEntityDataPacket.create(this);
 
     }
 

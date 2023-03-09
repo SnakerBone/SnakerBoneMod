@@ -18,6 +18,7 @@ import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
  **/
 @SuppressWarnings(SnakerBonePolicy.WarningSuppression.CUSTOM_SET)
 public class WaterColourBlockRender extends GeoBlockRenderer<WaterColourBlockEntity> {
+
     public WaterColourBlockRender(BlockEntityRendererProvider.Context rendererProvider) {
 
         super(rendererProvider, new WaterColourBlockModel());
