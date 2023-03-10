@@ -16,15 +16,12 @@ import snaker.snakerbone.data.SnakerBoneRegistries;
 import snaker.snakerbone.registry.SnakerBoneContentRegistry;
 import snaker.snakerbone.registry.SnakerBoneEntityRegistry;
 import snaker.snakerbone.registry.SnakerBoneWorldGenRegistry;
-import snaker.snakerbone.util.SnakerBoneTools;
+import snaker.snakerbone.utility.SnakerBoneUtilities;
 import software.bernie.geckolib3.GeckoLib;
-
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
 
 /**
  * Created by SnakerBone on 12/12/2022
  **/
-@SuppressWarnings(CUSTOM_SET)
 @Mod(SnakerBone.MODID)
 public class SnakerBone {
 
@@ -51,7 +48,7 @@ public class SnakerBone {
 
         SnakerBoneWorldGenRegistry.registerBiomes();
 
-        MinecraftForge.EVENT_BUS.register(new SnakerBoneTools());
+        MinecraftForge.EVENT_BUS.register(new SnakerBoneUtilities());
         MinecraftForge.EVENT_BUS.register(this);
     }
 

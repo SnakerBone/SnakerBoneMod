@@ -18,17 +18,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import snaker.snakerbone.data.SnakerBoneAttributes;
-import snaker.snakerbone.entity.ai.goal.SnakerBoneLookAroundGoal;
-import snaker.snakerbone.entity.ai.goal.SnakerBoneWanderGoal;
+import snaker.snakerbone.entity.ai.SnakerBoneLookAroundGoal;
+import snaker.snakerbone.entity.ai.SnakerBoneWanderGoal;
 
 import javax.annotation.Nullable;
-
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.ALL;
 
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-@SuppressWarnings(ALL)
 public class FlyingCreatureBase extends Animal implements FlyingAnimal {
     public FlyingCreatureBase(EntityType<? extends Animal> type, Level world) {
 

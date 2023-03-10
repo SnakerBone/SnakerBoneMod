@@ -5,25 +5,23 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import snaker.snakerbone.data.SnakerBoneRegistries;
-import snaker.snakerbone.entity.boss.utterfly.Utterfly;
-import snaker.snakerbone.entity.creature.flutterfly.Flutterfly;
-import snaker.snakerbone.entity.creature.glider.Glider;
-import snaker.snakerbone.entity.mob.cosmo.Cosmo;
-import snaker.snakerbone.entity.mob.flare.Flare;
-import snaker.snakerbone.entity.mob.snipe.Snipe;
-import snaker.snakerbone.entity.projectile.explosive_homming_arrow.ExplosiveHommingArrow;
-import snaker.snakerbone.entity.projectile.homming_arrow.HommingArrow;
-import snaker.snakerbone.entity.projectile.laser.Laser;
-import snaker.snakerbone.util.SnakerBoneResourceLocation;
+import snaker.snakerbone.entity.boss.Utterfly;
+import snaker.snakerbone.entity.creature.Flutterfly;
+import snaker.snakerbone.entity.creature.Glider;
+import snaker.snakerbone.entity.mob.Cosmo;
+import snaker.snakerbone.entity.mob.Flare;
+import snaker.snakerbone.entity.mob.Snipe;
+import snaker.snakerbone.entity.projectile.ExplosiveHommingArrow;
+import snaker.snakerbone.entity.projectile.HommingArrow;
+import snaker.snakerbone.entity.projectile.Laser;
+import snaker.snakerbone.utility.SnakerBoneResourceLocation;
 
 import static net.minecraftforge.registries.ForgeRegistries.ENTITY_TYPES;
 import static snaker.snakerbone.SnakerBone.MODID;
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
 
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class SnakerBoneEntityRegistry {
 
     /**
@@ -43,6 +41,4 @@ public class SnakerBoneEntityRegistry {
     public static final RegistryObject<EntityType<HommingArrow>> HOMMING_ARROW = SB_ENTITIES.register(SnakerBoneRegistries.HOMMING_ARROW, () -> EntityType.Builder.of((EntityType.EntityFactory<HommingArrow>) HommingArrow::new, MobCategory.MISC).sized(0.1F, 0.1F).build(SnakerBoneRegistries.HOMMING_ARROW));
     public static final RegistryObject<EntityType<ExplosiveHommingArrow>> EXPLOSIVE_HOMMING_ARROW = SB_ENTITIES.register(SnakerBoneRegistries.EXPLOSIVE_HOMMING_ARROW, () -> EntityType.Builder.of((EntityType.EntityFactory<ExplosiveHommingArrow>) ExplosiveHommingArrow::new, MobCategory.MISC).sized(0.1F, 0.1F).build(SnakerBoneRegistries.EXPLOSIVE_HOMMING_ARROW));
     public static final RegistryObject<EntityType<Laser>> LASER = SB_ENTITIES.register(SnakerBoneRegistries.LASER, () -> EntityType.Builder.of((EntityType.EntityFactory<Laser>) Laser::new, MobCategory.MISC).sized(0.1F, 0.1F).build(SnakerBoneRegistries.LASER));
-
-
 }

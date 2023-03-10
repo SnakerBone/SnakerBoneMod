@@ -10,12 +10,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import snaker.snakerbone.data.SnakerBoneAttributes;
 
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
-
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class CreatureBase extends PathfinderMob {
     public CreatureBase(EntityType<? extends PathfinderMob> type, Level world) {
 
@@ -27,11 +24,9 @@ public class CreatureBase extends PathfinderMob {
 
     @Override
     protected void registerGoals() {
-
         goalSelector.addGoal(3, new RandomStrollGoal(this, 1));
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1));
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6));
-
     }
 }

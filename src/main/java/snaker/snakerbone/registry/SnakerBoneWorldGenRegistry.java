@@ -7,18 +7,15 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import snaker.snakerbone.SnakerBone;
 import snaker.snakerbone.data.SnakerBoneRegistries;
-import snaker.snakerbone.util.SnakerBoneResourceLocation;
+import snaker.snakerbone.utility.SnakerBoneResourceLocation;
 import snaker.snakerbone.world.biome.ShaderHills;
 import snaker.snakerbone.world.biome.ShaderPlains;
 
 import java.util.function.Supplier;
 
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
-
 /**
  * Created by SnakerBone on 8/03/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class SnakerBoneWorldGenRegistry {
     public static DeferredRegister<Biome> SB_BIOMES = DeferredRegister.create(Registry.BIOME_REGISTRY, SnakerBone.MODID);
     public static final ResourceKey<Biome> SHADER_PLAINS = register(SnakerBoneRegistries.SHADER_PLAINS);

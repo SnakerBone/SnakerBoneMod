@@ -8,6 +8,9 @@ import net.minecraft.world.item.ItemStack;
 
 import static snaker.snakerbone.SnakerBone.SNAKERBONE_ITEMS;
 
+/**
+ * Created by SnakerBone on 8/03/2023
+ **/
 public class EntityKiller extends Item {
     public EntityKiller() {
 

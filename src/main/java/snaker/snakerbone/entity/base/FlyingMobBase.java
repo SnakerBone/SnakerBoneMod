@@ -11,17 +11,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import snaker.snakerbone.data.SnakerBoneAttributes;
-import snaker.snakerbone.entity.ai.control.SnakerBoneFlyingControl;
-import snaker.snakerbone.entity.ai.goal.SnakerBoneLookAroundGoal;
-import snaker.snakerbone.entity.ai.goal.SnakerBoneRandomFlyGoal;
-import snaker.snakerbone.entity.ai.goal.SnakerBoneSwitchGameModeGoal;
-
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
+import snaker.snakerbone.entity.ai.SnakerBoneFlyingControl;
+import snaker.snakerbone.entity.ai.SnakerBoneLookAroundGoal;
+import snaker.snakerbone.entity.ai.SnakerBoneRandomFlyGoal;
+import snaker.snakerbone.entity.ai.SnakerBoneSwitchGameModeGoal;
 
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class FlyingMobBase extends FlyingMob implements Enemy {
     protected FlyingMobBase(EntityType<? extends FlyingMobBase> type, Level world) {
 

@@ -7,14 +7,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerbone.registry.SnakerBoneContentRegistry;
-import snaker.snakerbone.util.SnakerBonePolicy;
 
 import static net.minecraft.world.level.material.Material.METAL;
 
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-@SuppressWarnings(SnakerBonePolicy.WarningSuppression.CUSTOM_SET)
 public class StarsBlock extends BaseEntityBlock {
     public StarsBlock() {
 

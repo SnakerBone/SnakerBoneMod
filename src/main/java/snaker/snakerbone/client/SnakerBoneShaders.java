@@ -10,20 +10,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.client.event.RegisterShadersEvent;
-import snaker.snakerbone.data.SnakerBoneRegistries;
 import snaker.snakerbone.entity.SnakerBoneEntityVariants;
-import snaker.snakerbone.util.SnakerBoneResourceLocation;
-import snaker.snakerbone.util.SnakerBoneTools;
+import snaker.snakerbone.utility.SnakerBoneResourceLocation;
+import snaker.snakerbone.utility.SnakerBoneUtilities;
 
 import java.util.Map;
 
-import static snaker.snakerbone.client.SnakerBoneRenderHelper.PublicRenderStateShards.*;
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
+import static snaker.snakerbone.client.SnakerBoneRenderFactory.PublicRenderStateShards.*;
+import static snaker.snakerbone.utility.SnakerBoneUtilities.RANDOM_PLACEHOLDER;
 
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class SnakerBoneShaders {
 
     public static CCShaderInstance swirl;
@@ -76,92 +74,113 @@ public class SnakerBoneShaders {
     public static CCShaderInstance fire;
     public static CCUniform fireTime;
 
-    public static RenderType ISTARS = RenderType.create(SnakerBoneRegistries.STARS_SHADER, DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.TRIANGLES, 256, true, false, RenderType.CompositeState.builder()
+    public static CCShaderInstance plain;
+    public static CCUniform plainColour;
+
+    public static RenderType ISTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.TRIANGLES, 256, true, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> stars))
             .setLightmapState(LIGHTMAP)
             .setCullState(NO_CULL)
             .setOverlayState(OVERLAY)
             .createCompositeState(false));
-    public static RenderType BSWIRL = RenderType.create(SnakerBoneRegistries.SWIRL_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType IPLAIN = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.TRIANGLES, 256, true, false, RenderType.CompositeState.builder()
+            .setShaderState(new RenderStateShard.ShaderStateShard(() -> plain))
+            .setLightmapState(LIGHTMAP)
+            .setCullState(NO_CULL)
+            .setOverlayState(OVERLAY)
+            .createCompositeState(false));
+    public static RenderType BSWIRL = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> swirl))
             .setLightmapState(LIGHTMAP)
             .setCullState(NO_CULL)
             .setOverlayState(OVERLAY)
             .createCompositeState(false));
-    public static RenderType BSNOW = RenderType.create(SnakerBoneRegistries.SNOW_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType BSNOW = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> snow))
             .setLightmapState(LIGHTMAP)
             .setCullState(NO_CULL)
             .setOverlayState(OVERLAY)
             .createCompositeState(false));
-    public static RenderType BWATERCOLOUR = RenderType.create(SnakerBoneRegistries.WATERCOLOUR_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType BWATERCOLOUR = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.POSITION, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> watercolour))
             .setLightmapState(LIGHTMAP)
             .setCullState(NO_CULL)
             .setOverlayState(OVERLAY)
             .createCompositeState(false));
-    public static RenderType BMULTICOLOUR = RenderType.create(SnakerBoneRegistries.MULTICOLOUR_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType BMULTICOLOUR = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> multicolour))
             .setLightmapState(LIGHTMAP)
             .setCullState(NO_CULL)
             .setOverlayState(OVERLAY)
             .createCompositeState(false));
-    public static RenderType BFIRE = RenderType.create(SnakerBoneRegistries.FIRE_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType BFIRE = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> fire))
             .setLightmapState(LIGHTMAP)
             .setCullState(NO_CULL)
             .setOverlayState(OVERLAY)
             .createCompositeState(false));
-    public static RenderType BSTARS = RenderType.create(SnakerBoneRegistries.STARS_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType BSTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> stars))
             .setLightmapState(LIGHTMAP)
             .setCullState(NO_CULL)
             .setOverlayState(OVERLAY)
             .createCompositeState(false));
-    public static RenderType EFIRE = RenderType.create(SnakerBoneRegistries.FIRE_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType BPLAIN = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+            .setShaderState(new RenderStateShard.ShaderStateShard(() -> plain))
+            .setLightmapState(LIGHTMAP)
+            .setCullState(NO_CULL)
+            .setOverlayState(OVERLAY)
+            .createCompositeState(false));
+    public static RenderType EFIRE = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> fire))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType ESTARS = RenderType.create(SnakerBoneRegistries.STARS_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType ESTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> stars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType ERED_STARS = RenderType.create(SnakerBoneRegistries.RED_STARS_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType ERED_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> redStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EGREEN_STARS = RenderType.create(SnakerBoneRegistries.GREEN_STARS_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType EGREEN_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> greenStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EBLUE_STARS = RenderType.create(SnakerBoneRegistries.BLUE_STARS_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType EBLUE_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> blueStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EYELLOW_STARS = RenderType.create(SnakerBoneRegistries.YELLOW_STARS_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType EYELLOW_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> yellowStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EPINK_STARS = RenderType.create(SnakerBoneRegistries.PINK_STARS_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType EPINK_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> pinkStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EPURPLE_STARS = RenderType.create(SnakerBoneRegistries.PURPLE_STARS_SHADER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+    public static RenderType EPURPLE_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(() -> purpleStars))
+            .setCullState(NO_CULL)
+            .setDepthTestState(EQUAL_DEPTH_TEST)
+            .setLightmapState(LIGHTMAP)
+            .createCompositeState(false));
+    public static RenderType EPLAIN = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
+            .setShaderState(new RenderStateShard.ShaderStateShard(() -> plain))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
@@ -172,31 +191,31 @@ public class SnakerBoneShaders {
         event.registerShader(CCShaderInstance.create(event.getResourceManager(), new SnakerBoneResourceLocation("swirl"), DefaultVertexFormat.POSITION_TEX), shaderObj -> {
             swirl = (CCShaderInstance) shaderObj;
             swirlTime = swirl.getUniform("Time");
-            swirl.onApply(() -> swirlTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
+            swirl.onApply(() -> swirlTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
         });
 
         event.registerShader(CCShaderInstance.create(event.getResourceManager(), new SnakerBoneResourceLocation("snow"), DefaultVertexFormat.POSITION_TEX), shaderObj -> {
             snow = (CCShaderInstance) shaderObj;
             snowTime = snow.getUniform("Time");
-            snow.onApply(() -> snowTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
+            snow.onApply(() -> snowTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
         });
 
         event.registerShader(CCShaderInstance.create(event.getResourceManager(), new SnakerBoneResourceLocation("watercolour"), DefaultVertexFormat.POSITION_TEX), shaderObj -> {
             watercolour = (CCShaderInstance) shaderObj;
             watercolourTime = watercolour.getUniform("Time");
-            watercolour.onApply(() -> watercolourTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
+            watercolour.onApply(() -> watercolourTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
         });
 
         event.registerShader(CCShaderInstance.create(event.getResourceManager(), new SnakerBoneResourceLocation("multicolour"), DefaultVertexFormat.POSITION_TEX), shaderObj -> {
             multicolour = (CCShaderInstance) shaderObj;
             multicolourTime = multicolour.getUniform("Time");
-            multicolour.onApply(() -> multicolourTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
+            multicolour.onApply(() -> multicolourTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
         });
 
         event.registerShader(CCShaderInstance.create(event.getResourceManager(), new SnakerBoneResourceLocation("fire"), DefaultVertexFormat.POSITION_TEX), shaderObj -> {
             fire = (CCShaderInstance) shaderObj;
             fireTime = fire.getUniform("Time");
-            fire.onApply(() -> fireTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
+            fire.onApply(() -> fireTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20));
         });
 
         event.registerShader(CCShaderInstance.create(event.getResourceManager(), new SnakerBoneResourceLocation("stars"), DefaultVertexFormat.POSITION_TEX), shaderObj -> {
@@ -205,7 +224,7 @@ public class SnakerBoneShaders {
             starsColour = stars.getUniform("Colour");
             starsBackground = stars.getUniform("Background");
             stars.onApply(() -> {
-                starsTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
+                starsTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
                 starsColour.glUniform3f(1, 1, 1);
                 starsBackground.glUniform1b(false);
             });
@@ -217,7 +236,7 @@ public class SnakerBoneShaders {
             redStarsColour = redStars.getUniform("Colour");
             redStarsBackground = redStars.getUniform("Background");
             redStars.onApply(() -> {
-                redStarsTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
+                redStarsTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
                 redStarsColour.glUniform3f(0.85F, 0.1F, 0.25F);
                 redStarsBackground.glUniform1b(true);
             });
@@ -229,7 +248,7 @@ public class SnakerBoneShaders {
             greenStarsColour = greenStars.getUniform("Colour");
             greenStarsBackground = greenStars.getUniform("Background");
             greenStars.onApply(() -> {
-                greenStarsTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
+                greenStarsTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
                 greenStarsColour.glUniform3f(0.5F, 1, 0.25F);
                 greenStarsBackground.glUniform1b(true);
             });
@@ -241,7 +260,7 @@ public class SnakerBoneShaders {
             blueStarsColour = blueStars.getUniform("Colour");
             blueStarsBackground = blueStars.getUniform("Background");
             blueStars.onApply(() -> {
-                blueStarsTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
+                blueStarsTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
                 blueStarsColour.glUniform3f(0, 0.5F, 1);
                 blueStarsBackground.glUniform1b(true);
             });
@@ -253,7 +272,7 @@ public class SnakerBoneShaders {
             yellowStarsColour = yellowStars.getUniform("Colour");
             yellowStarsBackground = yellowStars.getUniform("Background");
             yellowStars.onApply(() -> {
-                yellowStarsTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
+                yellowStarsTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
                 yellowStarsColour.glUniform3f(1, 1, 0);
                 yellowStarsBackground.glUniform1b(true);
             });
@@ -265,7 +284,7 @@ public class SnakerBoneShaders {
             pinkStarsColour = pinkStars.getUniform("Colour");
             pinkStarsBackground = pinkStars.getUniform("Background");
             pinkStars.onApply(() -> {
-                pinkStarsTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
+                pinkStarsTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
                 pinkStarsColour.glUniform3f(1, 0.5F, 0.8F);
                 pinkStarsBackground.glUniform1b(true);
             });
@@ -277,9 +296,17 @@ public class SnakerBoneShaders {
             purpleStarsColour = purpleStars.getUniform("Colour");
             purpleStarsBackground = purpleStars.getUniform("Background");
             purpleStars.onApply(() -> {
-                purpleStarsTime.glUniform1f((SnakerBoneTools.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
+                purpleStarsTime.glUniform1f((SnakerBoneUtilities.ticksElapsed + Minecraft.getInstance().getFrameTime()) / 20);
                 purpleStarsColour.glUniform3f(0.6F, 0, 0.8F);
                 purpleStarsBackground.glUniform1b(true);
+            });
+        });
+
+        event.registerShader(CCShaderInstance.create(event.getResourceManager(), new SnakerBoneResourceLocation("plain"), DefaultVertexFormat.POSITION_TEX), shaderObj -> {
+            plain = (CCShaderInstance) shaderObj;
+            plainColour = plain.getUniform("Colour");
+            plain.onApply(() -> {
+                plainColour.glUniform4f(0, 0, 0, 0);
             });
         });
     }

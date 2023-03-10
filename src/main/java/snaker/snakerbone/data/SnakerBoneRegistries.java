@@ -1,12 +1,8 @@
 package snaker.snakerbone.data;
 
-import static snaker.snakerbone.SnakerBone.MODID;
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
-
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class SnakerBoneRegistries {
 
     /**
@@ -64,6 +60,7 @@ public class SnakerBoneRegistries {
      **/
     public static final String ENTITY_KILLER = "entity_killer";
     public static final String FACTORIAL_SWORD = "factorial_sword";
+    public static final String LANCE = "lance";
 
     /**
      * Sound events
@@ -98,21 +95,4 @@ public class SnakerBoneRegistries {
      * Surface Builders
      **/
     public static final String SHADER_HILLS_CSB = "shader_hills_csb";
-
-    /**
-     * Shaders
-     **/
-    public static final String SWIRL_SHADER = MODID + ":swirl_shader";
-    public static final String SNOW_SHADER = MODID + ":snow_shader";
-    public static final String WATERCOLOUR_SHADER = MODID + ":watercolour_shader";
-    public static final String MULTICOLOUR_SHADER = MODID + ":multicolour_shader";
-    public static final String FIRE_SHADER = MODID + ":fire_shader";
-    public static final String STARS_SHADER = MODID + ":stars_shader";
-    public static final String RED_STARS_SHADER = MODID + ":red_stars_shader";
-    public static final String GREEN_STARS_SHADER = MODID + ":green_stars_shader";
-    public static final String BLUE_STARS_SHADER = MODID + ":blue_stars_shader";
-    public static final String YELLOW_STARS_SHADER = MODID + ":yellow_stars_shader";
-    public static final String PINK_STARS_SHADER = MODID + ":pink_stars_shader";
-    public static final String PURPLE_STARS_SHADER = MODID + ":purple_stars_shader";
-
 }

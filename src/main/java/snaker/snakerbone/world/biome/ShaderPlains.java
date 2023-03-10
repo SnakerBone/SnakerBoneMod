@@ -24,13 +24,11 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 import static net.minecraft.world.level.biome.Biomes.PLAINS;
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
-import static snaker.snakerbone.util.SnakerBoneTools.hexToInt;
+import static snaker.snakerbone.utility.SnakerBoneUtilities.hexToInt;
 
 /**
  * Created by SnakerBone on 8/03/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class ShaderPlains {
     public static Biome getBiome() {
 
@@ -76,23 +74,10 @@ public class ShaderPlains {
 
     }
 
-    private static void addDefaultFeatures(BiomeGenerationSettings.Builder builder) {
-
-        BiomeDefaultFeatures.addDefaultOres(builder);
-        BiomeDefaultFeatures.addDefaultSoftDisks(builder);
-        BiomeDefaultFeatures.addExtraEmeralds(builder);
-        BiomeDefaultFeatures.addInfestedStone(builder);
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(builder);
-        BiomeDefaultFeatures.addDefaultCrystalFormations(builder);
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(builder);
-        BiomeDefaultFeatures.addDefaultSprings(builder);
-
-    }
-
     public static class RuleData {
-        private static final SurfaceRules.RuleSource SWIRL_BLOCK = makeStateRule(SnakerBoneContentRegistry.SWIRL_BLOCK);
-        private static final SurfaceRules.RuleSource STARS_BLOCK = makeStateRule(SnakerBoneContentRegistry.STARS_BLOCK);
-        private static final SurfaceRules.RuleSource WATERCOLOUR_BLOCK = makeStateRule(SnakerBoneContentRegistry.WATERCOLOUR_BLOCK);
+        private static final SurfaceRules.RuleSource SWIRL_BLOCK = makeStateRule(SnakerBoneContentRegistry.SWIRL_BLOCK.get());
+        private static final SurfaceRules.RuleSource STARS_BLOCK = makeStateRule(SnakerBoneContentRegistry.STARS_BLOCK.get());
+        private static final SurfaceRules.RuleSource WATERCOLOUR_BLOCK = makeStateRule(SnakerBoneContentRegistry.WATERCOLOUR_BLOCK.get());
 
         public static SurfaceRules.RuleSource getRules() {
 
@@ -101,12 +86,6 @@ public class ShaderPlains {
             SurfaceRules.RuleSource surface = SurfaceRules.sequence(SurfaceRules.ifTrue(WaterBlockCheck, STARS_BLOCK), SWIRL_BLOCK);
 
             return SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.isBiome(SnakerBoneWorldGenRegistry.SHADER_PLAINS), WATERCOLOUR_BLOCK), SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface));
-
-        }
-
-        private static SurfaceRules.RuleSource makeStateRule(RegistryObject<Block> block) {
-
-            return SurfaceRules.state(block.get().defaultBlockState());
 
         }
 

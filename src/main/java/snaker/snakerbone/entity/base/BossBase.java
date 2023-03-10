@@ -7,14 +7,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import snaker.snakerbone.data.SnakerBoneAttributes;
-import snaker.snakerbone.entity.ai.goal.SnakerBoneSwitchGameModeGoal;
-
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
+import snaker.snakerbone.entity.ai.SnakerBoneSwitchGameModeGoal;
 
 /**
  * Created by SnakerBone on 4/01/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class BossBase extends MobBase {
     private final ServerBossEvent BOSS_INFO = new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.PROGRESS);
 

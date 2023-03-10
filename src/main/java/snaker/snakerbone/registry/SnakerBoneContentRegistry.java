@@ -29,20 +29,18 @@ import snaker.snakerbone.block.shader.watercolour.WaterColourBlockEntity;
 import snaker.snakerbone.block.shader.watercolour.WaterColourBlockItem;
 import snaker.snakerbone.data.SnakerBoneRegistries;
 import snaker.snakerbone.item.EntityKiller;
-import snaker.snakerbone.item.tool.FactorialSword;
-import snaker.snakerbone.util.SnakerBoneResourceLocation;
-import snaker.snakerbone.util.SnakerBoneTools;
+import snaker.snakerbone.item.FactorialSword;
+import snaker.snakerbone.utility.SnakerBoneResourceLocation;
+import snaker.snakerbone.utility.SnakerBoneUtilities;
 
 import java.util.function.Supplier;
 
 import static net.minecraftforge.registries.ForgeRegistries.*;
 import static snaker.snakerbone.SnakerBone.*;
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
 
 /**
  * Created by SnakerBone on 12/12/2022
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class SnakerBoneContentRegistry {
 
     /**
@@ -56,12 +54,12 @@ public class SnakerBoneContentRegistry {
     /**
      * Spawn Eggs
      **/
-    public static final RegistryObject<Item> COSMO_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.COSMO_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.COSMO, SnakerBoneTools.randomHex(), SnakerBoneTools.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
-    public static final RegistryObject<Item> SNIPE_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.SNIPE_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.SNIPE, SnakerBoneTools.randomHex(), SnakerBoneTools.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
-    public static final RegistryObject<Item> FLARE_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.FLARE_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.FLARE, SnakerBoneTools.randomHex(), SnakerBoneTools.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
-    public static final RegistryObject<Item> GLIDER_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.GLIDER_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.GLIDER, SnakerBoneTools.randomHex(), SnakerBoneTools.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
-    public static final RegistryObject<Item> FLUTTERFLY_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.FLUTTERFLY_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.FLUTTERFLY, SnakerBoneTools.randomHex(), SnakerBoneTools.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
-    public static final RegistryObject<Item> UTTERFLY_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.UTTERFLY_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.UTTERFLY, SnakerBoneTools.randomHex(), SnakerBoneTools.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
+    public static final RegistryObject<Item> COSMO_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.COSMO_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.COSMO, SnakerBoneUtilities.randomHex(), SnakerBoneUtilities.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
+    public static final RegistryObject<Item> SNIPE_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.SNIPE_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.SNIPE, SnakerBoneUtilities.randomHex(), SnakerBoneUtilities.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
+    public static final RegistryObject<Item> FLARE_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.FLARE_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.FLARE, SnakerBoneUtilities.randomHex(), SnakerBoneUtilities.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
+    public static final RegistryObject<Item> GLIDER_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.GLIDER_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.GLIDER, SnakerBoneUtilities.randomHex(), SnakerBoneUtilities.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
+    public static final RegistryObject<Item> FLUTTERFLY_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.FLUTTERFLY_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.FLUTTERFLY, SnakerBoneUtilities.randomHex(), SnakerBoneUtilities.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
+    public static final RegistryObject<Item> UTTERFLY_SPAWN_EGG = SB_ITEMS.register(SnakerBoneRegistries.UTTERFLY_SPAWN_EGG, () -> new ForgeSpawnEggItem(SnakerBoneEntityRegistry.UTTERFLY, SnakerBoneUtilities.randomHex(), SnakerBoneUtilities.randomHex(), new Item.Properties().tab(SnakerBone.SNAKERBONE_MOBS)));
 
     /**
      * Items

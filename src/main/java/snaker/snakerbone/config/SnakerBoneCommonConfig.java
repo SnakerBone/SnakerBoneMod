@@ -2,6 +2,9 @@ package snaker.snakerbone.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
+/**
+ * Created by SnakerBone on 8/03/2023
+ **/
 public class SnakerBoneCommonConfig {
     public static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec configSpec;

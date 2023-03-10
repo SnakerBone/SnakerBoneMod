@@ -4,8 +4,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import snaker.snakerbone.block.shader.watercolour.render.WaterColourBlockItemRender;
-import snaker.snakerbone.util.SnakerBonePolicy;
+import snaker.snakerbone.client.render.block.WaterColourBlockItemRender;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -19,7 +18,6 @@ import java.util.function.Consumer;
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-@SuppressWarnings(SnakerBonePolicy.WarningSuppression.CUSTOM_SET)
 public class WaterColourBlockItem extends BlockItem implements IAnimatable {
 
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);

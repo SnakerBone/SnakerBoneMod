@@ -1,11 +1,8 @@
 package snaker.snakerbone.data;
 
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
-
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class SnakerBoneAttributes {
 
     /**

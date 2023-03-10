@@ -9,12 +9,10 @@ import org.jetbrains.annotations.Nullable;
 import snaker.snakerbone.registry.SnakerBoneContentRegistry;
 
 import static net.minecraft.world.level.material.Material.METAL;
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
 
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class FireBlock extends BaseEntityBlock {
     public FireBlock() {
 

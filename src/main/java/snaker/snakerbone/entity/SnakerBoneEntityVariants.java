@@ -3,6 +3,9 @@ package snaker.snakerbone.entity;
 import java.util.Arrays;
 import java.util.Comparator;
 
+/**
+ * Created by SnakerBone on 8/03/2023
+ **/
 public class SnakerBoneEntityVariants {
     public enum Cosmo {
         PURPLE(0),

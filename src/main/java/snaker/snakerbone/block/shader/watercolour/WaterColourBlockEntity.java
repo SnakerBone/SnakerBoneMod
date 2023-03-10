@@ -16,12 +16,9 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import static snaker.snakerbone.util.SnakerBonePolicy.WarningSuppression.CUSTOM_SET;
-
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-@SuppressWarnings(CUSTOM_SET)
 public class WaterColourBlockEntity extends BlockEntity implements IAnimatable {
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
