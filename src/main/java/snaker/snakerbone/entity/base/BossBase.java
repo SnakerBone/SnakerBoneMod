@@ -7,7 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import snaker.snakerbone.data.SnakerBoneAttributes;
-import snaker.snakerbone.entity.ai.SnakerBoneSwitchGameModeGoal;
+import snaker.snakerbone.entity.ai.SnakerBoneSwitchPlayerGameModeGoal;
 
 /**
  * Created by SnakerBone on 4/01/2023
@@ -32,7 +32,7 @@ public class BossBase extends MobBase {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        goalSelector.addGoal(9, new SnakerBoneSwitchGameModeGoal(this));
+        goalSelector.addGoal(9, new SnakerBoneSwitchPlayerGameModeGoal(this));
     }
 
     @Override

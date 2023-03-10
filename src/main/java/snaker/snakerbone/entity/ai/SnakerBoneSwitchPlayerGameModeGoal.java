@@ -15,10 +15,10 @@ import java.util.List;
 /**
  * Created by SnakerBone on 28/02/2023
  **/
-public class SnakerBoneSwitchGameModeGoal extends Goal {
+public class SnakerBoneSwitchPlayerGameModeGoal extends Goal {
     private final Mob mob;
 
-    public SnakerBoneSwitchGameModeGoal(Mob owner) {
+    public SnakerBoneSwitchPlayerGameModeGoal(Mob owner) {
 
         mob = owner;
 

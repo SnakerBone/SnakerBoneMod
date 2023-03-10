@@ -14,7 +14,7 @@ import snaker.snakerbone.data.SnakerBoneAttributes;
 import snaker.snakerbone.entity.ai.SnakerBoneFlyingControl;
 import snaker.snakerbone.entity.ai.SnakerBoneLookAroundGoal;
 import snaker.snakerbone.entity.ai.SnakerBoneRandomFlyGoal;
-import snaker.snakerbone.entity.ai.SnakerBoneSwitchGameModeGoal;
+import snaker.snakerbone.entity.ai.SnakerBoneSwitchPlayerGameModeGoal;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -60,7 +60,7 @@ public class FlyingMobBase extends FlyingMob implements Enemy {
     protected void registerGoals() {
         goalSelector.addGoal(4, new SnakerBoneRandomFlyGoal(this));
         goalSelector.addGoal(6, new SnakerBoneLookAroundGoal(this));
-        goalSelector.addGoal(1, new SnakerBoneSwitchGameModeGoal(this));
+        goalSelector.addGoal(1, new SnakerBoneSwitchPlayerGameModeGoal(this));
         goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6));
         targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
