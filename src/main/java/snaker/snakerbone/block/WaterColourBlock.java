@@ -1,4 +1,4 @@
-package snaker.snakerbone.block.shader.snow;
+package snaker.snakerbone.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -13,9 +13,9 @@ import static net.minecraft.world.level.material.Material.METAL;
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-public class SnowBlock extends BaseEntityBlock {
+public class WaterColourBlock extends BaseEntityBlock {
 
-    public SnowBlock() {
+    public WaterColourBlock() {
 
         super(Properties.of(METAL).requiresCorrectToolForDrops().strength(5));
 
@@ -25,7 +25,7 @@ public class SnowBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 
-        return SnakerBoneContentRegistry.SNOW_BE.get().create(pos, state);
+        return SnakerBoneContentRegistry.WATERCOLOUR_BE.get().create(pos, state);
 
     }
 

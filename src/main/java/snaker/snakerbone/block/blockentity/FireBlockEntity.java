@@ -1,4 +1,4 @@
-package snaker.snakerbone.block.shader.fire;
+package snaker.snakerbone.block.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;

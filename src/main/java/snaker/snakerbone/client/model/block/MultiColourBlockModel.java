@@ -1,7 +1,7 @@
 package snaker.snakerbone.client.model.block;
 
 import net.minecraft.resources.ResourceLocation;
-import snaker.snakerbone.block.shader.multicolour.MultiColourBlockEntity;
+import snaker.snakerbone.block.blockentity.MultiColourBlockEntity;
 import snaker.snakerbone.utility.SnakerBoneResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 

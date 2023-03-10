@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
-import snaker.snakerbone.block.shader.snow.SnowBlockItem;
+import snaker.snakerbone.block.blockitem.SnowBlockItem;
 import snaker.snakerbone.client.SnakerBoneShaders;
 import snaker.snakerbone.client.model.block.SnowBlockItemModel;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;

@@ -1,10 +1,10 @@
-package snaker.snakerbone.block.shader.swirl;
+package snaker.snakerbone.block.blockitem;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import snaker.snakerbone.client.render.block.SwirlBlockItemRender;
+import snaker.snakerbone.client.render.block.SnowBlockItemRender;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -18,11 +18,10 @@ import java.util.function.Consumer;
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-public class SwirlBlockItem extends BlockItem implements IAnimatable {
-
+public class SnowBlockItem extends BlockItem implements IAnimatable {
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
-    public SwirlBlockItem(Block block, Properties properties) {
+    public SnowBlockItem(Block block, Properties properties) {
 
         super(block, properties);
 
@@ -44,7 +43,7 @@ public class SwirlBlockItem extends BlockItem implements IAnimatable {
 
         consumer.accept(new IClientItemExtensions() {
 
-            private final BlockEntityWithoutLevelRenderer bewlr = new SwirlBlockItemRender();
+            private final BlockEntityWithoutLevelRenderer bewlr = new SnowBlockItemRender();
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {

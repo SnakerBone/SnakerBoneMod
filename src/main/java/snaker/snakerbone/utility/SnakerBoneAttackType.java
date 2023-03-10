@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -26,13 +27,13 @@ public class SnakerBoneAttackType {
             List<LivingEntity> entities = world.getEntitiesOfClass(LivingEntity.class, aabb);
             DamageSource source = DamageSource.playerAttack((Player) attacker).bypassArmor();
 
-            float amount = SnakerBoneMath.factorial(entities.size());
+            BigInteger amount = SnakerBoneMath.largeFactorial(entities.size());
 
             for (LivingEntity entity : entities) {
 
                 if (entity != attacker) {
 
-                    entity.hurt(source, amount);
+                    entity.hurt(source, amount.floatValue());
 
                 }
             }

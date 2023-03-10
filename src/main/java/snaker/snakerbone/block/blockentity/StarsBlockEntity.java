@@ -1,10 +1,9 @@
-package snaker.snakerbone.block.shader.fire;
+package snaker.snakerbone.block.blockentity;
 
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import snaker.snakerbone.client.render.block.FireBlockItemRender;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import snaker.snakerbone.registry.SnakerBoneContentRegistry;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -13,17 +12,15 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import java.util.function.Consumer;
-
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-public class FireBlockItem extends BlockItem implements IAnimatable {
+public class StarsBlockEntity extends BlockEntity implements IAnimatable {
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
-    public FireBlockItem(Block block, Properties properties) {
+    public StarsBlockEntity(BlockPos pos, BlockState state) {
 
-        super(block, properties);
+        super(SnakerBoneContentRegistry.STARS_BE.get(), pos, state);
 
     }
 
@@ -35,28 +32,6 @@ public class FireBlockItem extends BlockItem implements IAnimatable {
         return PlayState.CONTINUE;
 
     }
-
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-
-        super.initializeClient(consumer);
-
-        consumer.accept(new IClientItemExtensions() {
-
-            private final BlockEntityWithoutLevelRenderer bewlr = new FireBlockItemRender();
-
-            @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-
-                return bewlr;
-
-            }
-
-        });
-
-    }
-
-    ;
 
     @Override
     public void registerControllers(AnimationData data) {

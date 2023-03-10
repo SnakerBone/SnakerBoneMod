@@ -1,4 +1,4 @@
-package snaker.snakerbone.block.shader.watercolour;
+package snaker.snakerbone.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -13,9 +13,9 @@ import static net.minecraft.world.level.material.Material.METAL;
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-public class WaterColourBlock extends BaseEntityBlock {
+public class SwirlBlock extends BaseEntityBlock {
 
-    public WaterColourBlock() {
+    public SwirlBlock() {
 
         super(Properties.of(METAL).requiresCorrectToolForDrops().strength(5));
 
@@ -25,14 +25,13 @@ public class WaterColourBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 
-        return SnakerBoneContentRegistry.WATERCOLOUR_BE.get().create(pos, state);
+        return SnakerBoneContentRegistry.SWIRL_BE.get().create(pos, state);
 
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState state) {
+    public RenderShape getRenderShape(BlockState pState) {
 
         return RenderShape.ENTITYBLOCK_ANIMATED;
-
     }
 }

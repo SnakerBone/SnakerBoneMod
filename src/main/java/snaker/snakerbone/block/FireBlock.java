@@ -1,4 +1,4 @@
-package snaker.snakerbone.block.shader.fire;
+package snaker.snakerbone.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;

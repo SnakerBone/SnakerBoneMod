@@ -1,8 +1,12 @@
-package snaker.snakerbone.block.shader.snow;
+package snaker.snakerbone.block.blockentity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import snaker.snakerbone.registry.SnakerBoneContentRegistry;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -15,12 +19,12 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-public class SnowBlockEntity extends BlockEntity implements IAnimatable {
+public class MultiColourBlockEntity extends BlockEntity implements IAnimatable {
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
-    public SnowBlockEntity(BlockPos pos, BlockState state) {
+    public MultiColourBlockEntity(BlockPos pos, BlockState state) {
 
-        super(SnakerBoneContentRegistry.SNOW_BE.get(), pos, state);
+        super(SnakerBoneContentRegistry.MULTICOLOUR_BE.get(), pos, state);
 
     }
 
@@ -30,6 +34,20 @@ public class SnowBlockEntity extends BlockEntity implements IAnimatable {
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> entity) {
 
         return PlayState.CONTINUE;
+
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+
+        if (level != null) {
+
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+
+        }
+
+        return new ClientboundBlockUpdatePacket(getBlockPos(), getBlockState());
 
     }
 

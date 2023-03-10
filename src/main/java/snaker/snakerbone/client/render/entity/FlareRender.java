@@ -1,7 +1,7 @@
 package snaker.snakerbone.client.render.entity;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import snaker.snakerbone.client.layer.FlareLayer;
+import snaker.snakerbone.client.layer.entity.FlareLayer;
 import snaker.snakerbone.client.model.entity.FlareModel;
 import snaker.snakerbone.entity.mob.Flare;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;

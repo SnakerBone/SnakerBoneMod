@@ -1,7 +1,7 @@
 package snaker.snakerbone.client.model.block;
 
 import net.minecraft.resources.ResourceLocation;
-import snaker.snakerbone.block.shader.snow.SnowBlockItem;
+import snaker.snakerbone.block.blockitem.SnowBlockItem;
 import snaker.snakerbone.utility.SnakerBoneResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 

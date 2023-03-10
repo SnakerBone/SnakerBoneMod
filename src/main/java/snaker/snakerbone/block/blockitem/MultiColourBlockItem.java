@@ -1,4 +1,4 @@
-package snaker.snakerbone.block.shader.multicolour;
+package snaker.snakerbone.block.blockitem;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;

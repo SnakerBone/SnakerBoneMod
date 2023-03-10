@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
-import snaker.snakerbone.block.shader.stars.StarsBlockEntity;
+import snaker.snakerbone.block.blockentity.StarsBlockEntity;
 import snaker.snakerbone.client.SnakerBoneShaders;
 import snaker.snakerbone.client.model.block.StarsBlockModel;
 import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;

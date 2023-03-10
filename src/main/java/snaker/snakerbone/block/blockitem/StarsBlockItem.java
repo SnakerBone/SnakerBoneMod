@@ -1,13 +1,10 @@
-package snaker.snakerbone.block.shader.multicolour;
+package snaker.snakerbone.block.blockitem;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
-import snaker.snakerbone.registry.SnakerBoneContentRegistry;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import snaker.snakerbone.client.render.block.StarsBlockItemRender;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -16,15 +13,17 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+import java.util.function.Consumer;
+
 /**
  * Created by SnakerBone on 22/02/2023
  **/
-public class MultiColourBlockEntity extends BlockEntity implements IAnimatable {
+public class StarsBlockItem extends BlockItem implements IAnimatable {
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
-    public MultiColourBlockEntity(BlockPos pos, BlockState state) {
+    public StarsBlockItem(Block block, Properties properties) {
 
-        super(SnakerBoneContentRegistry.MULTICOLOUR_BE.get(), pos, state);
+        super(block, properties);
 
     }
 
@@ -37,19 +36,27 @@ public class MultiColourBlockEntity extends BlockEntity implements IAnimatable {
 
     }
 
-    @Nullable
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
 
-        if (level != null) {
+        super.initializeClient(consumer);
 
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        consumer.accept(new IClientItemExtensions() {
 
-        }
+            private final BlockEntityWithoutLevelRenderer bewlr = new StarsBlockItemRender();
 
-        return new ClientboundBlockUpdatePacket(getBlockPos(), getBlockState());
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+
+                return bewlr;
+
+            }
+
+        });
 
     }
+
+    ;
 
     @Override
     public void registerControllers(AnimationData data) {

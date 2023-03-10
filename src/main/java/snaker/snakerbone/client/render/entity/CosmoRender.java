@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
-import snaker.snakerbone.client.layer.CosmoLayer;
+import snaker.snakerbone.client.layer.entity.CosmoLayer;
 import snaker.snakerbone.client.model.entity.CosmoModel;
 import snaker.snakerbone.entity.mob.Cosmo;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;

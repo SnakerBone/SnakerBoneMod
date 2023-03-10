@@ -52,7 +52,7 @@ public class SnakerBoneMath {
 
         if (value > 12) {
 
-            LOGGER.warn("Result of sum over max value for type int. Returning that instead: " + "(" + Integer.MAX_VALUE + ")");
+            LOGGER.warn("Result of sum over max value for type int. Returning that instead: " + Integer.MAX_VALUE);
 
             return Integer.MAX_VALUE;
 
@@ -71,7 +71,7 @@ public class SnakerBoneMath {
 
         if (value > 20) {
 
-            LOGGER.warn("Result of sum over max value for type long. Returning that instead: " + "(" + Long.MAX_VALUE + ")");
+            LOGGER.warn("Result of sum over max value for type long. Returning that instead: " + Long.MAX_VALUE);
 
             return Long.MAX_VALUE;
 
@@ -90,7 +90,7 @@ public class SnakerBoneMath {
 
         if (value > 10) {
 
-            LOGGER.warn("Result of sum over max value for type float. Returning that instead: " + "(" + Float.MAX_VALUE + ")");
+            LOGGER.warn("Result of sum over max value for type float. Returning that instead: " + Float.MAX_VALUE);
 
             return Float.MAX_VALUE;
 
@@ -109,7 +109,7 @@ public class SnakerBoneMath {
 
         if (value > 18) {
 
-            LOGGER.warn("Result of sum over max value for type double. Returning that instead: " + "(" + Double.MAX_VALUE + ")");
+            LOGGER.warn("Result of sum over max value for type double. Returning that instead: " + Double.MAX_VALUE);
 
             return Double.MAX_VALUE;
 
