@@ -1,0 +1,35 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.cosmo_spine",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bb_main",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{
+							"origin": [-1, 0, 0],
+							"size": [1, 25, 1],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [1, 16]},
+								"east": {"uv": [0, 0], "uv_size": [1, 16]},
+								"south": {"uv": [0, 0], "uv_size": [1, 16]},
+								"west": {"uv": [0, 0], "uv_size": [1, 16]},
+								"up": {"uv": [1, 1], "uv_size": [-1, -1]},
+								"down": {"uv": [1, 1], "uv_size": [-1, -1]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}
