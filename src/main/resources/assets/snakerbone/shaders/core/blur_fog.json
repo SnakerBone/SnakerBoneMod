@@ -4,8 +4,8 @@
     "srcrgb": "srcalpha",
     "dstrgb": "1-srcalpha"
   },
-  "vertex": "snakerbone:watercolour",
-  "fragment": "snakerbone:watercolour",
+  "vertex": "snakerbone:blur_fog",
+  "fragment": "snakerbone:blur_fog",
   "attributes": [
     "Position",
     "UV"
@@ -63,6 +63,34 @@
       "type": "float",
       "count": 1,
       "values": [
+        0.0
+      ]
+    },
+    {
+      "name": "Alpha",
+      "type": "float",
+      "count": 1,
+      "values": [
+        0.0
+      ]
+    },
+    {
+      "name": "HSV",
+      "type": "vec3",
+      "count": 3,
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "RGB",
+      "type": "vec3",
+      "count": 3,
+      "values": [
+        0.0,
+        0.0,
         0.0
       ]
     }

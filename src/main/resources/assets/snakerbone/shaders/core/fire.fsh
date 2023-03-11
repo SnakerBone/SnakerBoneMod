@@ -5,100 +5,99 @@ uniform float Time;
 in vec2 textureProjection;
 out vec4 fragColor;
 
-vec3 rgb2hsv(vec3 c)
+vec3 sRGBtoHSV(vec3 sVecIn)
 {
-    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
-    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
-    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+    vec4 sConversion = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 sPosition = mix(vec4(sVecIn.bg, sConversion.wz), vec4(sVecIn.gb, sConversion.xy), step(sVecIn.b, sVecIn.g));
+    vec4 sRelative = mix(vec4(sPosition.xyw, sVecIn.r), vec4(sVecIn.r, sPosition.yzx), step(sPosition.x, sVecIn.r));
 
-    float d = q.x - min(q.w, q.y);
-    float e = 1.0 - 1.0;
+    float sDarkness = sRelative.x - min(sRelative.w, sRelative.y);
+    float sZero = 1.0 - 1.0;
 
-    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+    return vec3(abs(sRelative.z + (sRelative.w - sRelative.y) / (6.0 * sDarkness + sZero)), sDarkness / (sRelative.x + sZero), sRelative.x);
 }
 
-vec3 hsv2rgb(vec3 c)
+vec3 sHSVtoRGB(vec3 sVecIn)
 {
-    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    vec4 sConversion = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 sPosition = abs(fract(sVecIn.xxx + sConversion.xyz) * 6.0 - sConversion.www);
 
-    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+    return sVecIn.z * mix(sConversion.xxx, clamp(sPosition - sConversion.xxx, 0.0, 1.0), sVecIn.y);
 }
 
-float rand(vec2 n)
+float sRandom(vec2 sVecIn)
 {
-    return fract(sin(cos(dot(n, vec2(12.9898, 12.1414)))) * 83758.5453);
+    return fract(sin(cos(dot(sVecIn, vec2(12.9898, 12.1414)))) * 83758.5453);
 }
 
-float noise(vec2 n)
+float sNoise(vec2 sVecIn)
 {
-    vec2 d = vec2(0.0, 1.0);
+    vec2 sDarkness = vec2(0.0, 1.0);
+    vec2 sBrightness = floor(sVecIn), sFlame = smoothstep(vec2(0.0), vec2(1.0), fract(sVecIn));
 
-    vec2 b = floor(n), f = smoothstep(vec2(0.0), vec2(1.0), fract(n));
-
-    return mix(mix(rand(b), rand(b + d.yx), f.x), mix(rand(b + d.xy), rand(b + d.yy), f.x), f.y);
+    return mix(mix(sRandom(sBrightness), sRandom(sBrightness + sDarkness.yx), sFlame.x), mix(sRandom(sBrightness + sDarkness.xy), sRandom(sBrightness + sDarkness.yy), sFlame.x), sFlame.y);
 }
 
-float fbm(vec2 n)
+float sFractMotion(vec2 sVecIn)
 {
-    float total = 0.0, amplitude = 1.0;
+    float sTotal = 0.0, sAmplitude = 1.0;
 
     for (int i = 0; i < 5; i++)
     {
-        total += noise(n) * amplitude;
+        sTotal += sNoise(sVecIn) * sAmplitude;
 
-        n += n * 1.7;
+        sVecIn += sVecIn * 1.7;
 
-        amplitude *= 0.47;
+        sAmplitude *= 0.47;
     }
 
-    return total;
+    return sTotal;
 }
 
 void main()
 {
-    vec2 resolution = vec2(256, 256);
+    vec2 sResolution = vec2(256, 256);
 
-    vec3 c1 = vec3(0.5, 0.0, 0.1);
-    vec3 c2 = vec3(0.9, 0.1, 0.0);
-    vec3 c3 = vec3(0.2, 0.1, 0.7);
-    vec3 c4 = vec3(1.0, 0.9, 0.1);
-    vec3 c5 = vec3(0.1);
-    vec3 c6 = vec3(0.9);
+    vec3 sColours1 = vec3(0.5, 0.0, 0.1);
+    vec3 sColours2 = vec3(0.9, 0.1, 0.0);
+    vec3 sColours3 = vec3(0.2, 0.1, 0.7);
+    vec3 sColours4 = vec3(1.0, 0.9, 0.1);
+    vec3 sColours5 = vec3(0.1);
+    vec3 sColours6 = vec3(0.9);
 
-    vec2 speed = vec2(1.2, 0.1);
+    vec2 sSpeed = vec2(1.2, 0.1);
 
-    float shift = 1.327 + sin(Time * 2.0) / 2.4;
-    float alpha = 1.0;
+    float sShift = 1.327 + sin(Time * 2.0) / 2.4;
+    float sAlpha = 1.0;
 
-    float dist = 3.5 - sin(Time * 0.4) / 1.89;
+    float sDistance = 3.5 - sin(Time * 0.4) / 1.89;
 
-    vec2 p = gl_FragCoord.xy * dist / resolution.xx;
+    vec2 sProjection = gl_FragCoord.xy * sDistance / sResolution.xx;
 
-    p.x -= Time / 1.1;
+    sProjection.x -= Time / 1.1;
 
-    float q = fbm(p - Time * 0.01 + 1.0 * sin(Time) / 10.0);
-    float qb = fbm(p - Time * 0.002 + 0.1 * cos(Time) / 5.0);
-    float q2 = fbm(p - Time * 0.44 - 5.0 * cos(Time) / 7.0) - 6.0;
-    float q3 = fbm(p - Time * 0.9 - 10.0 * cos(Time) / 30.0) - 4.0;
-    float q4 = fbm(p - Time * 2.0 - 20.0 * sin(Time) / 20.0) + 2.0;
+    float sRelative1 = sFractMotion(sProjection - Time * 0.01 + 1.0 * sin(Time) / 10.0);
+    float sRelative2 = sFractMotion(sProjection - Time * 0.002 + 0.1 * cos(Time) / 5.0);
+    float sRelative3 = sFractMotion(sProjection - Time * 0.44 - 5.0 * cos(Time) / 7.0) - 6.0;
+    float sRelative4 = sFractMotion(sProjection - Time * 0.9 - 10.0 * cos(Time) / 30.0) - 4.0;
+    float sRelative5 = sFractMotion(sProjection - Time * 2.0 - 20.0 * sin(Time) / 20.0) + 2.0;
 
-    q = (q + qb - .4 * q2 - 2.0 * q3 + .6 * q4) / 3.8;
+    sRelative1 = (sRelative1 + sRelative2 - 0.4 * sRelative3 - 2.0 * sRelative4 + 0.6 * sRelative5) / 3.8;
 
-    vec2 r = vec2(fbm(p + q / 2.0 + Time * speed.x - p.x - p.y), fbm(p + q - Time * speed.y));
-    vec3 c = mix(c1, c2, fbm(p + r)) + mix(c3, c4, r.x) - mix(c5, c6, r.y);
-    vec3 colour = vec3(c * cos(shift * gl_FragCoord.y / resolution.y));
+    vec2 sFinalRelative = vec2(sFractMotion(sProjection + sRelative1 / 2.0 + Time * sSpeed.x - sProjection.x - sProjection.y), sFractMotion(sProjection + sRelative1 - Time * sSpeed.y));
+    vec3 sRawColours = mix(sColours1, sColours2, sFractMotion(sProjection + sFinalRelative)) + mix(sColours3, sColours4, sFinalRelative.x) - mix(sColours5, sColours6, sFinalRelative.y);
+    vec3 sColour = vec3(sRawColours * cos(sShift * gl_FragCoord.y / sResolution.y));
 
-    colour += .05;
-    colour.r *= .8;
+    sColour += 0.05;
+    sColour.r *= 0.8;
 
-    vec3 hsv = rgb2hsv(colour);
+    vec3 sHSV = sRGBtoHSV(sColour);
 
-    hsv.y *= hsv.z * 1.1;
-    hsv.z *= hsv.y * 1.13;
-    hsv.y = (2.2 - hsv.z * .9) * 1.20;
+    sHSV.y *= sHSV.z * 1.1;
+    sHSV.z *= sHSV.y * 1.13;
+    sHSV.y = (2.2 - sHSV.z * .9) * 1.20;
 
-    colour = hsv2rgb(hsv);
+    sColour = sHSVtoRGB(sHSV);
 
-    fragColor = vec4(colour.x, colour.y, colour.z, alpha);
+    fragColor = vec4(sColour.x, sColour.y, sColour.z, sAlpha);
 }

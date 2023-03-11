@@ -5,95 +5,91 @@ uniform float Time;
 in vec2 textureProjection;
 out vec4 fragColor;
 
-mat3 rotX(float a)
+mat3 sRotateX(float sNumIn)
 {
-    float c = cos(a);
-    float s = sin(a);
+    float sCosine = cos(sNumIn);
+    float sSine = sin(sNumIn);
 
-    return mat3(1, 0, 0, 0, c, -s, 0, s, c);
+    return mat3(1, 0, 0, 0, sCosine, -sSine, 0, sSine, sCosine);
 }
 
-mat3 rotY(float a)
+mat3 sRotateY(float sNumIn)
 {
-    float c = cos(a);
-    float s = sin(a);
+    float sCosine = cos(sNumIn);
+    float sSine = sin(sNumIn);
 
-    return mat3(c, 0, -s, 0, 1, 0, s, 0, c);
+    return mat3(sCosine, 0, -sSine, 0, 1, 0, sSine, 0, sCosine);
 }
 
-float random(vec2 pos)
+float sRandom(vec2 sVecIn)
 {
-    return fract(sin(dot(pos.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+    return fract(sin(dot(sVecIn.xy, vec2(12.9898, 78.233))) * 43758.5453123);
 }
 
-float noise(vec2 pos)
+float sNoise(vec2 sVecIn)
 {
-    vec2 i = floor(pos);
-    vec2 f = fract(pos);
+    vec2 sFloor = floor(sVecIn);
+    vec2 sFract = fract(sVecIn);
 
-    float a = random(i + vec2(0.0, 0.0));
-    float b = random(i + vec2(1.0, 0.0));
-    float c = random(i + vec2(0.0, 1.0));
-    float d = random(i + vec2(1.0, 1.0));
+    float sRand1 = sRandom(sFloor + vec2(0.0, 0.0));
+    float sRand2 = sRandom(sFloor + vec2(1.0, 0.0));
+    float sRand3 = sRandom(sFloor + vec2(0.0, 1.0));
+    float sRand4 = sRandom(sFloor + vec2(1.0, 1.0));
 
-    vec2 u = f * f * (3.0 - 2.0 * f);
+    vec2 sUV = sFract * sFract * (3.0 - 2.0 * sFract);
 
-    return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+    return mix(sRand1, sRand2, sUV.x) + (sRand3 - sRand1) * sUV.y * (1.0 - sUV.x) + (sRand4 - sRand2) * sUV.x * sUV.y;
 }
 
-float fbm(vec2 pos)
+float sFractMotion(vec2 sVecIn)
 {
-    float v = 0.0;
-    float a = 0.5;
+    float sPosition = 0.0;
+    float sAmount = 0.5;
 
-    vec2 shift = vec2(100.0);
+    vec2 sShift = vec2(100.0);
 
-    mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
+    mat2 sRotate = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
 
-    for (int i=0; i<16; i++)
+    for (int i = 0; i < 16; i++)
     {
-        v += a * noise(pos);
+        sPosition += sAmount * sNoise(sVecIn);
 
-        pos = rot * pos * 2.0 + shift;
+        sVecIn = sRotate * sVecIn * 2.0 + sShift;
 
-        a *= 0.5;
+        sAmount *= 0.5;
     }
 
-    return v;
+    return sPosition;
 }
 
 void main(void)
 {
-    vec2 resolution = vec2(256, 256);
+    vec2 sResolution = vec2(256, 256);
+    vec2 sProjection = (gl_FragCoord.xy * 2.0 - sResolution.xy) / min(sResolution.x, sResolution.y);
 
-    vec2 p = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+    float sTime = 5.0 * Time / 5.0;
 
-    float t = 1.0, d;
-    float time2 = 5.0 * Time / 5.0;
+    vec2 sQuaternion = vec2(1.0);
 
-    vec2 q = vec2(1.0);
+    sQuaternion.x = sFractMotion(sProjection + 0.00 * sTime);
+    sQuaternion.y = sFractMotion(sProjection + vec2(1.0));
 
-    q.x = fbm(p + 0.00 * time2);
-    q.y = fbm(p + vec2(1.0));
+    vec2 sRotation = vec2(0.0);
 
-    vec2 r = vec2(0.0);
+    sRotation.x = sFractMotion(sProjection + 7.0 * sQuaternion + vec2(1.7, 9.2) + 0.15 * sTime);
+    sRotation.y = sFractMotion(sProjection + 2.0 * sQuaternion + vec2(8.3, 2.8) + 0.126 * sTime);
 
-    r.x = fbm(p + 7.0 * q + vec2(1.7, 9.2) + 0.15 * time2);
-    r.y = fbm(p + 2.0 * q + vec2(8.3, 2.8) + 0.126 * time2);
+    vec2 sUV = gl_FragCoord.xy / sResolution.xy - 0.5;
 
-    float f = fbm(p + r);
+    sUV.x *= (sResolution.x / sResolution.y);
 
-    vec2 uv = gl_FragCoord.xy/resolution.xy - 0.5;
+    vec3 sColour = vec3(0.0);
 
-    uv.x *= (resolution.x/resolution.y);
+    sColour = vec3(sFractMotion(sUV * (1.0 + 0.2 * sin(Time * 0.666))));
 
-    vec3 colour = vec3(0.0);
+    sColour = mix(sColour, vec3(0.5 + 0.5 * sin(Time + sUV.yxx + vec3(0, 2, 4))), 0.9);
 
-    colour = vec3(fbm(uv * (1.0+0.2*sin(Time * 0.666))));
+    sColour = mix(sColour, vec3(1.0), clamp(length(sRotation.x), 0.0, 1.0));
 
-    colour = mix(colour, vec3(0.5 + 0.5*sin(Time+uv.yxx+vec3(0, 2, 4))), 0.9);
-
-    colour = mix(colour, vec3(1.0), clamp(length(r.x), 0.0, 1.0));
-
-    fragColor = vec4(colour, 1.0);
+    fragColor = vec4(sColour, 1.0);
 }

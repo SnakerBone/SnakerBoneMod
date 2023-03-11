@@ -5,330 +5,326 @@ uniform float Time;
 in vec2 textureProjection;
 out vec4 fragColor;
 
-float radius = 0.25;
-float zoom = 0.0;
+vec3 sRaytraceX;
+vec3 sRaytraceY;
+vec3 sRaytraceZ;
+vec3 sLight = vec3(0.0, 0.0, 1.0);
+vec2 sSeed = vec2(0.0, 0.0);
+vec4 sColours1 = vec4(0.0, 157.0, 113.0, 270.0);
+vec4 sColours2 = vec4(1.0, 158.0, 114.0, 271.0);
+float sColourMax = 1.0;
+float sRadius = 0.25;
+float sZoom = 0.0;
+float sOctaves = 15.0;
+float sPower;
+float sInitialResolution;
 
-vec3 light = vec3(0.0, 0.0, 1.0);
-vec2 seed = vec2(0.0, 0.0);
-
-float octaves = 15.0;
-float powr;
-float res;
-
-vec4 NC0 = vec4(0.0, 157.0, 113.0, 270.0);
-vec4 NC1 = vec4(1.0, 158.0, 114.0, 271.0);
-
-vec4 hash4(vec4 n)
+vec4 sRandom(vec4 sVecIn)
 {
-    return fract(sin(n) * 1399763.5453123);
+    return fract(sin(sVecIn) * 1399763.5453123);
 }
 
-float noise2(vec2 x)
+float sNoise(vec2 sVecIn)
 {
-    vec2 p = floor(x);
-    vec2 f = fract(x);
+    vec2 sFloor = floor(sVecIn);
+    vec2 sFract = fract(sVecIn);
 
-    f = f * f * (3.0 - 2.0 * f);
+    sFract = sFract * sFract * (3.0 - 2.0 * sFract);
 
-    float n = p.x + p.y * 157.0;
+    float sFloorXY = sFloor.x + sFloor.y * 157.0;
 
-    vec4 h = hash4(vec4(n) + vec4(NC0.xy, NC1.xy));
+    vec4 sHSV = sRandom(vec4(sFloorXY) + vec4(sColours1.xy, sColours2.xy));
 
-    vec2 s1 = mix(h.xy, h.zw, f.xx);
+    vec2 sMixHSV = mix(sHSV.xy, sHSV.zw, sFract.xx);
 
-    return mix(s1.x, s1.y, f.y);
+    return mix(sMixHSV.x, sMixHSV.y, sFract.y);
 }
 
-float noise222(vec2 x, vec2 y, vec2 z)
+float sFractNoise(vec2 sVecInR, vec2 sVecInG, vec2 sVecInB)
 {
-    vec4 lx = vec4(x * y.x, x * y.y);
-    vec4 p = floor(lx);
-    vec4 f = fract(lx);
+    vec4 sXYZ = vec4(sVecInR * sVecInG.x, sVecInR * sVecInG.y);
 
-    f = f * f * (3.0 - 2.0 * f);
+    vec4 sFloor = floor(sXYZ);
+    vec4 sFract = fract(sXYZ);
 
-    vec2 n = p.xz + p.yw * 157.0;
+    sFract = sFract * sFract * (3.0 - 2.0 * sFract);
 
-    vec4 h = mix(hash4(n.xxyy + NC0.xyxy), hash4(n.xxyy + NC1.xyxy), f.xxzz);
+    vec2 sHSV = sFloor.xz + sFloor.yw * 157.0;
 
-    return dot(mix(h.xz, h.yw, f.yw), z);
+    vec4 sMixHSV = mix(sRandom(sHSV.xxyy + sColours1.xyxy), sRandom(sHSV.xxyy + sColours2.xyxy), sFract.xxzz);
+
+    return dot(mix(sMixHSV.xz, sMixHSV.yw, sFract.yw), sVecInB);
 }
 
-float noise3(vec3 x)
+float sFragNoise(vec3 sVecInX)
 {
-    vec3 p = floor(x);
-    vec3 f = fract(x);
+    vec3 sFloor = floor(sVecInX);
+    vec3 sFract = fract(sVecInX);
 
-    f = f * f * (3.0 - 2.0 * f);
+    sFract = sFract * sFract * (3.0 - 2.0 * sFract);
 
-    float n = p.x + dot(p.yz, vec2(157.0, 113.0));
+    float sHSV = sFloor.x + dot(sFloor.yz, vec2(157.0, 113.0));
 
-    vec4 s1 = mix(hash4(vec4(n) + NC0), hash4(vec4(n) + NC1), f.xxxx);
+    vec4 sMixHSV = mix(sRandom(vec4(sHSV) + sColours1), sRandom(vec4(sHSV) + sColours2), sFract.xxxx);
 
-    return mix(mix(s1.x, s1.y, f.y), mix(s1.z, s1.w, f.y), f.z);
+    return mix(mix(sMixHSV.x, sMixHSV.y, sFract.y), mix(sMixHSV.z, sMixHSV.w, sFract.y), sFract.z);
 }
 
-vec2 noise3_2(vec3 x)
+vec2 sVertNoise(vec3 sVecIn)
 {
-    return vec2(noise3(x), noise3(x + 100.0));
+    return vec2(sFragNoise(sVecIn), sFragNoise(sVecIn + 100.0));
 }
 
-float map(vec2 rad)
+float sMap(vec2 sVecIn)
 {
-    float a;
+    float sAmount;
 
-    if (res < 0.0015)
+    if (sInitialResolution < 0.0015)
     {
-        a = noise222(rad.xy, vec2(20.6, 100.6), vec2(0.9, 0.1));
+        sAmount = sFractNoise(sVecIn.xy, vec2(20.6, 100.6), vec2(0.9, 0.1));
 
-    } else if (res < 0.005)
+    } else if (sInitialResolution < 0.005)
     {
-        a = noise2(rad.xy * 20.6);
+        sAmount = sNoise(sVecIn.xy * 20.6);
 
-    } else a = noise2(rad.xy * 10.3);
+    } else sAmount = sNoise(sVecIn.xy * 10.3);
 
-    return (a - 0.5);
+    return (sAmount - 0.5);
 }
 
-vec3 distObj(vec3 pos, vec3 ray, float r, vec2 seed)
+vec3 sObjectDistance(vec3 sVecInPosition, vec3 sVecInRaytrace, float sNumIn, vec2 sVecInSeed)
 {
-    float rq = r * r;
+    float sRoot = sNumIn * sNumIn;
 
-    vec3 dist = ray * 10000.0;
-    vec3 norm = vec3(0.0, 0.0, 1.0);
+    vec3 sDistance = sVecInRaytrace * 10000.0;
+    vec3 sNormalRed = vec3(0.0, 0.0, 1.0);
 
-    float invn = 1.0 / dot(norm, ray);
-    float depthi = 0.0125;
+    float sVis = 1.0 / dot(sNormalRed, sVecInRaytrace);
+    float sDepth = 0.0125;
 
-    if (invn < 0.0) depthi = -depthi;
+    if (sVis < 0.0) sDepth = -sDepth;
 
-    float ds = 2.0 * depthi * invn;
+    float sDepthVis = 2.0 * sDepth * sVis;
 
-    vec3 r1 = ray * (dot(norm, pos) - depthi) * invn - pos;
-    vec3 op1 = r1 + norm * depthi;
+    vec3 sRaytraceVec = sVecInRaytrace * (dot(sNormalRed, sVecInPosition) - sDepth) * sVis - sVecInPosition;
+    vec3 sRaytraceDepthTest = sRaytraceVec + sNormalRed * sDepth;
 
-    float len1 = dot(op1, op1);
+    float sRaytraceResult = dot(sRaytraceDepthTest, sRaytraceDepthTest);
 
-    vec3 r2 = r1 + ray * ds;
-    vec3 op2 = r2 - norm * depthi;
+    vec3 sRaytraceResult2 = sRaytraceVec + sVecInRaytrace * sDepthVis;
+    vec3 sRaytraceResult3 = sRaytraceResult2 - sNormalRed * sDepth;
 
-    float len2 = dot(op2, op2);
+    float sRaytraceResultLength = dot(sRaytraceResult3, sRaytraceResult3);
 
-    vec3 n = normalize(cross(ray, norm));
+    vec3 sRaytraceNormal = normalize(cross(sVecInRaytrace, sNormalRed));
 
-    float mind = dot(pos, n);
+    float sRaytraceDot = dot(sVecInPosition, sRaytraceNormal);
 
-    vec3 n2 = cross(ray, n);
+    vec3 sRaytraceCross = cross(sVecInRaytrace, sRaytraceNormal);
 
-    float d = dot(n2, pos) / dot(n2, norm);
-    float invd = 0.2 / 0.0125;
+    float sResultDot = dot(sRaytraceCross, sVecInPosition) / dot(sRaytraceCross, sNormalRed);
+    float sVisNum = 0.2 / 0.0125;
 
-    if ((len1 < rq || len2 < rq) || (abs(mind) < r && d <= 0.0125 && d >= -0.0125))
+    if ((sRaytraceResult < sRoot || sRaytraceResultLength < sRoot) || (abs(sRaytraceDot) < sNumIn && sResultDot <= 0.0125 && sResultDot >= -0.0125))
     {
-        vec3 r3 = r2;
+        vec3 sRaytraceResultNew2 = sRaytraceResult2;
 
-        float len = len1;
+        float sRaytraceNewLength = sRaytraceResult;
 
-        if (len >= rq)
+        if (sRaytraceNewLength >= sRoot)
         {
-            vec3 n3 = cross(norm, n);
+            vec3 sRaytraceNormalCross = cross(sNormalRed, sRaytraceNormal);
 
-            float a = inversesqrt(rq - mind * mind) * abs(dot(ray, n3));
+            float sVisRaytraceSqrt = inversesqrt(sRoot - sRaytraceDot * sRaytraceDot) * abs(dot(sVecInRaytrace, sRaytraceNormalCross));
 
-            vec3 dt = ray / a;
+            vec3 sRaytraceVecDot = sVecInRaytrace / sVisRaytraceSqrt;
 
-            r1 = -d * norm - mind * n - dt;
+            sRaytraceVec = -sResultDot * sNormalRed - sRaytraceDot * sRaytraceNormal - sRaytraceVecDot;
 
-            if (len2 >= rq)
+            if (sRaytraceResultLength >= sRoot)
             {
-                r2 = -d * norm - mind * n + dt;
+                sRaytraceResult2 = -sResultDot * sNormalRed - sRaytraceDot * sRaytraceNormal + sRaytraceVecDot;
             }
 
-            ds = dot(r2 - r1, ray);
+            sDepthVis = dot(sRaytraceResult2 - sRaytraceVec, sVecInRaytrace);
         }
 
-        ds = (abs(ds) + 0.1) / (15.0);
+        sDepthVis = (abs(sDepthVis) + 0.1) / (15.0);
 
-        ds = mix(0.0125, ds, 0.2);
+        sDepthVis = mix(0.0125, sDepthVis, 0.2);
 
-        if (ds > 0.01) ds = 0.01;
+        if (sDepthVis > 0.01) sDepthVis = 0.01;
 
-        float ir = 0.35 / r;
+        float sIrres = 0.35 / sNumIn;
 
-        r *= zoom;
+        sNumIn *= sZoom;
 
-        ray = ray * ds * 5.0;
+        sVecInRaytrace = sVecInRaytrace * sDepthVis * 5.0;
 
         for (float m = 0.0; m < 15.0; m += 1.0)
         {
-            if (m >= octaves) break;
+            if (m >= sOctaves) break;
 
-            float l = length(r1.xy);
+            float sRaytraceNewDelta = length(sRaytraceVec.xy);
 
-            vec2 c3 = abs(r1.xy / l);
+            vec2 sRaytraceToPos = abs(sRaytraceVec.xy / sRaytraceNewDelta);
 
-            if (c3.x > 0.5) c3 = abs(c3 * 0.5 + vec2(- c3.y, c3.x) * 0.86602540);
+            if (sRaytraceToPos.x > 0.5) sRaytraceToPos = abs(sRaytraceToPos * 0.5 + vec2(-sRaytraceToPos.y, sRaytraceToPos.x) * 0.86602540);
 
-            float g = l + c3.x * c3.x;
+            float sRaytraceNormalised = sRaytraceNewDelta + sRaytraceToPos.x * sRaytraceToPos.x;
 
-            l *= zoom;
+            sRaytraceNewDelta *= sZoom;
 
-            float h = l - r - 0.1;
+            float sRaytraceCrossDirty = sRaytraceNewDelta - sNumIn - 0.1;
 
-            l = pow(l, powr) + 0.1;
-            h = max(h, mix(map(c3 * l + seed), 1.0, abs(r1.z * invd))) + g * ir - 0.245;
+            sRaytraceNewDelta = pow(sRaytraceNewDelta, sPower) + 0.1;
+            sRaytraceCrossDirty = max(sRaytraceCrossDirty, mix(sMap(sRaytraceToPos * sRaytraceNewDelta + sVecInSeed), 1.0, abs(sRaytraceVec.z * sVisNum))) + sRaytraceNormalised * sIrres - 0.245;
 
-            if ((h < res * 20.0) || abs(r1.z) > 0.0125 + 0.01) break;
+            if ((sRaytraceCrossDirty < sInitialResolution * 20.0) || abs(sRaytraceVec.z) > 0.0125 + 0.01) break;
 
-            r1 += ray * h;
-            ray *= 0.99;
+            sRaytraceVec += sVecInRaytrace * sRaytraceCrossDirty;
+            sVecInRaytrace *= 0.99;
         }
 
-        if (abs(r1.z) < 0.0125 + 0.01) dist = r1 + pos;
+        if (abs(sRaytraceVec.z) < 0.0125 + 0.01) sDistance = sRaytraceVec + sVecInPosition;
     }
 
-    return dist;
+    return sDistance;
 }
 
-vec3 nray;
-vec3 nray1;
-vec3 nray2;
-
-float mxc = 1.0;
-
-vec4 filterFlake(vec4 color, vec3 pos, vec3 ray, vec3 ray1, vec3 ray2)
+vec4 sFilterFlake(vec4 sVecInColour, vec3 sVecInPosition, vec3 sVecInRaytraceX, vec3 sVecInRaytraceY, vec3 sVecInRaytraceZ)
 {
-    vec3 d = distObj(pos, ray, radius, seed);
-    vec3 n1 = distObj(pos, ray1, radius, seed);
-    vec3 n2 = distObj(pos, ray2, radius, seed);
-    vec3 lq = vec3(dot(d, d), dot(n1, n1), dot(n2, n2));
+    vec3 sDistanceX = sObjectDistance(sVecInPosition, sVecInRaytraceX, sRadius, sSeed);
+    vec3 sDistanceY = sObjectDistance(sVecInPosition, sVecInRaytraceY, sRadius, sSeed);
+    vec3 sDistanceZ = sObjectDistance(sVecInPosition, sVecInRaytraceZ, sRadius, sSeed);
 
-    if (lq.x < 10000.0 || lq.y < 10000.0 || lq.z < 10000.0)
+    vec3 sDistanceXYZ = vec3(dot(sDistanceX, sDistanceX), dot(sDistanceY, sDistanceY), dot(sDistanceZ, sDistanceZ));
+
+    if (sDistanceXYZ.x < 10000.0 || sDistanceXYZ.y < 10000.0 || sDistanceXYZ.z < 10000.0)
     {
-        vec3 n = normalize(cross(n1 - d, n2 - d));
+        vec3 sDistanceNormalXYZ = normalize(cross(sDistanceY - sDistanceX, sDistanceZ - sDistanceX));
 
-        if (lq.x < 10000.0 && lq.y < 10000.0 && lq.z < 10000.0)
+        if (sDistanceXYZ.x < 10000.0 && sDistanceXYZ.y < 10000.0 && sDistanceXYZ.z < 10000.0)
         {
-            nray = n;
+            sRaytraceX = sDistanceNormalXYZ;
         }
 
-        float da = pow(abs(dot(n, light)), 3.0);
+        float sDistancePow = pow(abs(dot(sDistanceNormalXYZ, sLight)), 3.0);
 
-        vec3 cf = mix(vec3(0.0, 0.4, 1.0), color.xyz * 10.0, abs(dot(n, ray)));
+        vec3 sMixToDistance = mix(vec3(0.0, 0.4, 1.0), sVecInColour.xyz * 10.0, abs(dot(sDistanceNormalXYZ, sVecInRaytraceX)));
 
-        cf = mix(cf, vec3(2.0), da);
-        color.xyz = mix(color.xyz, cf, mxc * mxc * (0.5 + abs(dot(n, ray)) * 0.5));
+        sMixToDistance = mix(sMixToDistance, vec3(2.0), sDistancePow);
+        sVecInColour.xyz = mix(sVecInColour.xyz, sMixToDistance, sColourMax * sColourMax * (0.5 + abs(dot(sDistanceNormalXYZ, sVecInRaytraceX)) * 0.5));
     }
 
-    return color;
+    return sVecInColour;
 }
 
 void main()
 {
-    vec2 resolution = vec2(256, 256);
+    vec2 sResolution = vec2(256, 256);
 
-    float timev = Time * 0.2;
+    float sTimeV = Time * 0.2;
 
-    res = 1.0 / resolution.y;
+    sInitialResolution = 1.0 / sResolution.y;
 
-    vec2 p = (- resolution.xy + 2.0 * gl_FragCoord.xy) * res;
+    vec2 sProjection = (-sResolution.xy + 2.0 * gl_FragCoord.xy) * sInitialResolution;
 
-    vec3 rotate;
+    vec3 sRotation;
 
-    mat3 mr;
+    mat3 sRaytraceMatrix;
 
-    vec3 ray = normalize(vec3(p, 2.0));
-    vec3 ray1;
-    vec3 ray2;
-    vec3 pos = vec3(0.0, 0.0, 1.0);
+    vec3 sNewRaytraceX = normalize(vec3(sProjection, 2.0));
+    vec3 sNewRaytraceY;
+    vec3 sNewRaytraceZ;
+    vec3 sVecNewPosition = vec3(0.0, 0.0, 1.0);
 
     fragColor = vec4(0.0, 0.0, 0.0, 0.0);
 
-    nray = vec3(0.0);
-    nray1 = vec3(0.0);
-    nray2 = vec3(0.0);
+    sRaytraceX = vec3(0.0);
+    sRaytraceY = vec3(0.0);
+    sRaytraceZ = vec3(0.0);
 
-    vec4 refcolor = vec4(0.0);
+    vec4 sReferenceColour = vec4(0.0);
 
-    octaves = 15.0 - 8.0;
+    sOctaves = 15.0 - 8.0;
 
-    vec2 addrot = vec2(0.0);
+    vec2 sAddRotation = vec2(0.0);
+    vec3 sAddPosition = vec3(0.0);
 
-    float mxcl = 1.0;
+    float sMaxAlphas = 1.0;
 
-    vec3 addpos = vec3(0.0);
+    sVecNewPosition.z = 1.0;
+    sColourMax = 1.0;
+    sRadius = 0.25;
 
-    pos.z = 1.0;
-    mxc = 1.0;
-    radius = 0.25;
-
-    float mzd = (zoom - 0.1) / 8.0;
+    float sMatrixZoom = (sZoom - 0.1) / 8.0;
 
     for (int i = 0; i < 20; i++)
     {
-        vec2 p2 = p - vec2(0.25) + vec2(0.1 * float(i));
+        vec2 sProjectionVec2 = sProjection - vec2(0.25) + vec2(0.1 * float(i));
 
-        ray = vec3(p2, 2.0) - nray * 2.0;
+        sNewRaytraceX = vec3(sProjectionVec2, 2.0) - sRaytraceX * 2.0;
 
-        ray1 = normalize(ray + vec3(0.0, res * 2.0, 0.0));
-        ray2 = normalize(ray + vec3(res * 2.0, 0.0, 0.0));
-        ray = normalize(ray);
+        sNewRaytraceY = normalize(sNewRaytraceX + vec3(0.0, sInitialResolution * 2.0, 0.0));
+        sNewRaytraceZ = normalize(sNewRaytraceX + vec3(sInitialResolution * 2.0, 0.0, 0.0));
+        sNewRaytraceX = normalize(sNewRaytraceX);
 
-        vec2 sb = ray.xy * length(pos) / dot(normalize(pos), ray) + vec2(0.0, timev);
+        vec2 sVecRaytraceMatrixDelta = sNewRaytraceX.xy * length(sVecNewPosition) / dot(normalize(sVecNewPosition), sNewRaytraceX) + vec2(0.0, sTimeV);
 
-        seed = floor((sb + vec2(0.0, pos.z))) + pos.z;
+        sSeed = floor((sVecRaytraceMatrixDelta + vec2(0.0, sVecNewPosition.z))) + sVecNewPosition.z;
 
-        vec3 seedn = vec3(seed, pos.z);
+        vec3 sSeedZ = vec3(sSeed, sVecNewPosition.z);
 
-        sb = floor(sb);
+        sVecRaytraceMatrixDelta = floor(sVecRaytraceMatrixDelta);
 
-        if (noise3(seedn) > 0.2 && i < int(8.0))
+        if (sFragNoise(sSeedZ) > 0.2 && i < int(8.0))
         {
-            powr = noise3(seedn * 10.0) * 1.9 + 0.1;
+            sPower = sFragNoise(sSeedZ * 10.0) * 1.9 + 0.1;
 
-            rotate.xy = sin((0.5 - noise3_2(seedn)) * timev * 5.0) * 0.3 + addrot;
-            rotate.z = (0.5 - noise3(seedn + vec3(10.0, 3.0, 1.0))) * timev * 5.0;
+            sRotation.xy = sin((0.5 - sVertNoise(sSeedZ)) * sTimeV * 5.0) * 0.3 + sAddRotation;
+            sRotation.z = (0.5 - sFragNoise(sSeedZ + vec3(10.0, 3.0, 1.0))) * sTimeV * 5.0;
 
-            seedn.z += timev * 0.5;
-            addpos.xy = sb + vec2(0.25, 0.25 - timev) + noise3_2(seedn) * 0.5;
+            sSeedZ.z += sTimeV * 0.5;
+            sAddPosition.xy = sVecRaytraceMatrixDelta + vec2(0.25, 0.25 - sTimeV) + sVertNoise(sSeedZ) * 0.5;
 
-            vec3 sins = sin(rotate);
-            vec3 coss = cos(rotate);
+            vec3 sSine = sin(sRotation);
+            vec3 sCosine = cos(sRotation);
 
-            mr = mat3(vec3(coss.x, 0.0, sins.x), vec3(0.0, 1.0, 0.0), vec3(- sins.x, 0.0, coss.x));
-            mr = mat3(vec3(1.0, 0.0, 0.0), vec3(0.0, coss.y, sins.y), vec3(0.0, - sins.y, coss.y)) * mr;
-            mr = mat3(vec3(coss.z, sins.z, 0.0), vec3(- sins.z, coss.z, 0.0), vec3(0.0, 0.0, 1.0)) * mr;
+            sRaytraceMatrix = mat3(vec3(sCosine.x, 0.0, sSine.x), vec3(0.0, 1.0, 0.0), vec3(-sSine.x, 0.0, sCosine.x));
+            sRaytraceMatrix = mat3(vec3(1.0, 0.0, 0.0), vec3(0.0, sCosine.y, sSine.y), vec3(0.0, -sSine.y, sCosine.y)) * sRaytraceMatrix;
+            sRaytraceMatrix = mat3(vec3(sCosine.z, sSine.z, 0.0), vec3(-sSine.z, sCosine.z, 0.0), vec3(0.0, 0.0, 1.0)) * sRaytraceMatrix;
 
-            light = normalize(vec3(1.0, 0.0, 1.0)) * mr;
-            vec4 cc = filterFlake(fragColor, (pos + addpos) * mr, ray * mr, ray1 * mr, ray2 * mr);
+            sLight = normalize(vec3(1.0, 0.0, 1.0)) * sRaytraceMatrix;
+            vec4 sFinalColours = sFilterFlake(fragColor, (sVecNewPosition + sAddPosition) * sRaytraceMatrix, sNewRaytraceX * sRaytraceMatrix, sNewRaytraceY * sRaytraceMatrix, sNewRaytraceZ * sRaytraceMatrix);
 
-            fragColor = mix(cc, fragColor, min(1.0, fragColor.w));
+            fragColor = mix(sFinalColours, fragColor, min(1.0, fragColor.w));
         }
 
-        seedn = vec3(sb, pos.z) + vec3(0.5, 1000.0, 300.0);
+        sSeedZ = vec3(sVecRaytraceMatrixDelta, sVecNewPosition.z) + vec3(0.5, 1000.0, 300.0);
 
-        if (noise3(seedn * 10.0) > 0.4)
+        if (sFragNoise(sSeedZ * 10.0) > 0.4)
         {
-            float raf = 0.3 + noise3(seedn * 100.0);
+            float sRandSeedNoise = 0.3 + sFragNoise(sSeedZ * 100.0);
 
-            addpos.xy = sb + vec2(0.2, 0.2 - timev) + noise3_2(seedn * 100.0) * 0.6;
+            sAddPosition.xy = sVecRaytraceMatrixDelta + vec2(0.2, 0.2 - sTimeV) + sVertNoise(sSeedZ * 100.0) * 0.6;
 
-            float l = length(ray * dot(ray, pos + addpos) - pos - addpos);
+            float sNewDeltaNumLength = length(sNewRaytraceX * dot(sNewRaytraceX, sVecNewPosition + sAddPosition) - sVecNewPosition - sAddPosition);
 
-            l = max(0.0, (1.0 - l * 10.0 * raf));
-            fragColor.xyzw += vec4(1.0, 1.2, 3.0, 1.0) * pow(l, 5.0) * (pow(0.6 + raf, 2.0) - 0.6) * mxcl;
+            sNewDeltaNumLength = max(0.0, (1.0 - sNewDeltaNumLength * 10.0 * sRandSeedNoise));
+            fragColor.xyzw += vec4(1.0, 1.2, 3.0, 1.0) * pow(sNewDeltaNumLength, 5.0) * (pow(0.6 + sRandSeedNoise, 2.0) - 0.6) * sMaxAlphas;
         }
 
-        mxc -= 1.1 / 8.0;
-        pos.z += 1.0;
-        octaves += 2.0;
-        mxcl -= 1.1 / float(20);
-        zoom -= mzd;
+        sColourMax -= 1.1 / 8.0;
+        sVecNewPosition.z += 1.0;
+        sOctaves += 2.0;
+        sMaxAlphas -= 1.1 / float(20);
+        sZoom -= sMatrixZoom;
     }
 
-    vec3 colour = mix(vec3(0.0), vec3(0.0, 0.0, 0.4), (-0.55 + p.y) * 2.0);
+    vec3 sColourOut = mix(vec3(0.0), vec3(0.0, 0.0, 0.4), (-0.55 + sProjection.y) * 2.0);
 
-    fragColor.xyz += mix((colour.xyz - fragColor.xyz) * 0.1, vec3(0.2, 0.5, 1.0), clamp((- p.y + 1.0) * 0.5, 0.0, 1.0));
+    fragColor.xyz += mix((sColourOut.xyz - fragColor.xyz) * 0.1, vec3(0.2, 0.5, 1.0), clamp((-sProjection.y + 1.0) * 0.5, 0.0, 1.0));
 
     fragColor = min(vec4(1.0), fragColor);
     fragColor.a = 1.0;

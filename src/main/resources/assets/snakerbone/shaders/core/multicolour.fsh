@@ -7,19 +7,18 @@ out vec4 fragColor;
 
 void main(void)
 {
-    vec2 resolution = vec2(256, 256);
+    vec2 sResolution = vec2(256, 256);
+    vec2 sProjection = 6. * (gl_FragCoord.xy / sResolution.xy);
 
-    vec2 coords = 6. * (gl_FragCoord.xy / resolution.xy);
-
-    for (int n = 1; n < 8; n++)
+    for (int i = 1; i < 8; i++)
     {
-        float t = Time;
-        float i = float(n);
+        float sTime = Time;
+        float sNumberIn = float(i);
 
-        coords += vec2(0.7 / i * sin(i * coords.y + t + 0.3 * i) + 0.8, 0.4 / i * sin(i * coords.x + t + 0.3 * i) + 1.6);
+        sProjection += vec2(0.7 / sNumberIn * sin(sNumberIn * sProjection.y + sTime + 0.3 * sNumberIn) + 0.8, 0.4 / sNumberIn * sin(sNumberIn * sProjection.x + sTime + 0.3 * sNumberIn) + 1.6);
     }
 
-    vec3 colour = vec3(0.5 * sin(coords.x) + 0.5, 0.5 * sin(coords.y) + 0.5, sin(coords.x + coords.y));
+    vec3 sColour = vec3(0.5 * sin(sProjection.x) + 0.5, 0.5 * sin(sProjection.y) + 0.5, sin(sProjection.x + sProjection.y));
 
-    fragColor = vec4(colour, 1.0);
+    fragColor = vec4(sColour, 1.0);
 }

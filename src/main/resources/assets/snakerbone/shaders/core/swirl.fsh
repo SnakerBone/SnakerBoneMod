@@ -7,21 +7,21 @@ out vec4 fragColor;
 
 void main() {
 
-    vec2 resolution = vec2(256, 256);
-    vec2 position = (2.0 * gl_FragCoord.xy - resolution) / max(resolution.x, resolution.y);
+    vec2 sResolution = vec2(256, 256);
+    vec2 sProjection = (2.0 * gl_FragCoord.xy - sResolution) / max(sResolution.x, sResolution.y);
 
-    for (int i = 1;i < 40; i++)
+    for (int i = 1; i < 40; i++)
     {
-        vec2 newPosition = position;
+        vec2 sPosition = sProjection;
 
-        newPosition.x += 0.6 / float(i) * sin(float(i) * position.y + Time / 25.0 + 0.3 * float(i)) + 25.0 + 5.0;
-        newPosition.y += 0.6 / float(i) * sin(float(i) * position.x + Time / 25.0 + 0.3 * float(i + 10)) - 25.0 + 5.0;
+        sPosition.x += 0.6 / float(i) * sin(float(i) * sProjection.y + Time / 25.0 + 0.3 * float(i)) + 25.0 + 5.0;
+        sPosition.y += 0.6 / float(i) * sin(float(i) * sProjection.x + Time / 25.0 + 0.3 * float(i + 10)) - 25.0 + 5.0;
 
-        position = newPosition;
+        sProjection = sPosition;
 
     }
 
-    vec3 finalColour = vec3(0.7 * sin(3.0 * position.x) + 0.7, 0.7 * sin(3.0 * position.y) + 0.7, sin(position.x + position.y));
+    vec3 sColour = vec3(0.7 * sin(3.0 * sProjection.x) + 0.7, 0.7 * sin(3.0 * sProjection.y) + 0.7, sin(sProjection.x + sProjection.y));
 
-    fragColor = vec4(finalColour, 1.0);
+    fragColor = vec4(sColour, 1.0);
 }
