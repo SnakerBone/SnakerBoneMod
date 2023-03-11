@@ -1,31 +1,22 @@
 package snaker.snakerbone.item;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tiers;
-import snaker.snakerbone.utility.SnakerBoneAttackType;
-
-import static snaker.snakerbone.SnakerBone.SNAKERBONE_ITEMS;
+import net.minecraft.world.item.Tier;
+import snaker.snakerbone.utility.AttackTypes;
 
 /**
  * Created by SnakerBone on 8/03/2023
  **/
 public class FactorialSword extends SwordItem {
-    public FactorialSword() {
-
-        super(Tiers.DIAMOND, 3, -2.4F, new Item.Properties().tab(SNAKERBONE_ITEMS));
-
+    public FactorialSword(Tier tier, int damageModifier, float speedModifier, Properties properties) {
+        super(tier, damageModifier, speedModifier, properties);
     }
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-
-        SnakerBoneAttackType.factorialAttackAOE(entity);
-
+        AttackTypes.factorialAttackAOE(entity);
         return super.onEntitySwing(stack, entity);
-
     }
-
 }

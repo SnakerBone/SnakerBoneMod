@@ -11,22 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class GliderModel extends AnimatedGeoModel<Glider> {
     @Override
     public ResourceLocation getModelResource(Glider entity) {
-
         return new SnakerBoneResourceLocation("geo/glider.geo.json");
-
     }
 
     @Override
     public ResourceLocation getTextureResource(Glider entity) {
-
         return new SnakerBoneResourceLocation("textures/entity/creature/glider.png");
-
     }
 
     @Override
     public ResourceLocation getAnimationResource(Glider entity) {
-
         return new SnakerBoneResourceLocation("animations/glider.animation.json");
-
     }
 }

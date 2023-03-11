@@ -6,24 +6,21 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import snaker.snakerbone.data.SnakerBoneAttributes;
-import snaker.snakerbone.entity.ai.SnakerBoneSwitchPlayerGameModeGoal;
+import snaker.snakerbone.data.AttributeConstants;
+import snaker.snakerbone.entity.ai.SwitchPlayerGameModeGoal;
 
 /**
  * Created by SnakerBone on 2/01/2023
  **/
 public class MobBase extends Monster {
     public MobBase(EntityType<? extends Monster> type, Level world) {
-
         super(type, world);
-
-        xpReward = SnakerBoneAttributes.MOB_XP_REWARD;
-
+        xpReward = AttributeConstants.MOB_XP_REWARD;
     }
 
     @Override
     protected void registerGoals() {
-        goalSelector.addGoal(1, new SnakerBoneSwitchPlayerGameModeGoal(this));
+        goalSelector.addGoal(1, new SwitchPlayerGameModeGoal(this));
         goalSelector.addGoal(6, new RandomStrollGoal(this, 1));
         goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.3, false));
         goalSelector.addGoal(0, new FloatGoal(this));

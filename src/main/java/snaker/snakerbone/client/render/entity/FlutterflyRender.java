@@ -17,20 +17,14 @@ import javax.annotation.Nullable;
  **/
 public class FlutterflyRender extends GeoEntityRenderer<Flutterfly> {
     public FlutterflyRender(EntityRendererProvider.Context renderManager) {
-
         super(renderManager, new FlutterflyModel());
-
     }
 
     @Override
     public RenderType getRenderType(Flutterfly entity, float pt, PoseStack ms, @Nullable MultiBufferSource rtb, @Nullable VertexConsumer vb, int light, ResourceLocation location) {
-
         if (entity.isBaby()) {
-
             ms.scale(0.5F, 0.5F, 0.5F);
-
         }
-
         return super.getRenderType(entity, pt, ms, rtb, vb, light, location);
     }
 }

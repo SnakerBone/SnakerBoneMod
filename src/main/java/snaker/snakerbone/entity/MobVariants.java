@@ -6,7 +6,7 @@ import java.util.Comparator;
 /**
  * Created by SnakerBone on 8/03/2023
  **/
-public class SnakerBoneEntityVariants {
+public class MobVariants {
     public enum Cosmo {
         PURPLE(0),
         RED(1),
@@ -20,20 +20,15 @@ public class SnakerBoneEntityVariants {
         private final int id;
 
         Cosmo(int id) {
-
             this.id = id;
-
         }
 
         public int getId() {
-
             return this.id;
         }
 
         public static Cosmo byId(int id) {
-
             return BY_ID[id % BY_ID.length];
-
         }
     }
 }

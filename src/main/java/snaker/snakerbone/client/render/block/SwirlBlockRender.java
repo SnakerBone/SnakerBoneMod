@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerbone.block.blockentity.SwirlBlockEntity;
-import snaker.snakerbone.client.SnakerBoneShaders;
+import snaker.snakerbone.client.Shaders;
 import snaker.snakerbone.client.model.block.SwirlBlockModel;
 import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
 
@@ -17,15 +17,11 @@ import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
  **/
 public class SwirlBlockRender extends GeoBlockRenderer<SwirlBlockEntity> {
     public SwirlBlockRender(BlockEntityRendererProvider.Context context) {
-
         super(context, new SwirlBlockModel());
-
     }
 
     @Override
     public RenderType getRenderType(SwirlBlockEntity animatable, float partialTick, PoseStack poseStack, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, ResourceLocation texture) {
-
-        return SnakerBoneShaders.BSWIRL;
-
+        return Shaders.BSWIRL;
     }
 }

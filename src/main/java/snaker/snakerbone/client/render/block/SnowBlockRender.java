@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerbone.block.blockentity.SnowBlockEntity;
-import snaker.snakerbone.client.SnakerBoneShaders;
+import snaker.snakerbone.client.Shaders;
 import snaker.snakerbone.client.model.block.SnowBlockModel;
 import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
 
@@ -17,15 +17,11 @@ import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
  **/
 public class SnowBlockRender extends GeoBlockRenderer<SnowBlockEntity> {
     public SnowBlockRender(BlockEntityRendererProvider.Context context) {
-
         super(context, new SnowBlockModel());
-
     }
 
     @Override
     public RenderType getRenderType(SnowBlockEntity block, float partialTick, PoseStack stack, @Nullable MultiBufferSource source, @Nullable VertexConsumer buffer, int packedLight, ResourceLocation texture) {
-
-        return SnakerBoneShaders.BSNOW;
-
+        return Shaders.BSNOW;
     }
 }

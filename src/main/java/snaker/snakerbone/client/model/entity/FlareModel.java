@@ -11,22 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class FlareModel extends AnimatedGeoModel<Flare> {
     @Override
     public ResourceLocation getModelResource(Flare entity) {
-
         return new SnakerBoneResourceLocation("geo/flare.geo.json");
-
     }
 
     @Override
     public ResourceLocation getTextureResource(Flare entity) {
-
         return SnakerBoneResourceLocation.BLACK_TEX_LOCATION;
-
     }
 
     @Override
     public ResourceLocation getAnimationResource(Flare entity) {
-
         return new SnakerBoneResourceLocation("animations/flare.animation.json");
-
     }
 }

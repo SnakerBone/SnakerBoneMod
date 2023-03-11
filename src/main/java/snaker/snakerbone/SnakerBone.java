@@ -10,13 +10,13 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import snaker.snakerbone.client.SnakerBoneShaders;
-import snaker.snakerbone.config.SnakerBoneCommonConfig;
-import snaker.snakerbone.data.SnakerBoneRegistries;
-import snaker.snakerbone.registry.SnakerBoneContentRegistry;
-import snaker.snakerbone.registry.SnakerBoneEntityRegistry;
-import snaker.snakerbone.registry.SnakerBoneWorldGenRegistry;
-import snaker.snakerbone.utility.SnakerBoneUtilities;
+import snaker.snakerbone.client.Shaders;
+import snaker.snakerbone.config.CommonConfig;
+import snaker.snakerbone.data.RegistryContants;
+import snaker.snakerbone.registry.ContentRegistry;
+import snaker.snakerbone.registry.EntityRegistry;
+import snaker.snakerbone.registry.WorldGenRegistry;
+import snaker.snakerbone.utility.Utilities;
 import software.bernie.geckolib3.GeckoLib;
 
 /**
@@ -24,61 +24,42 @@ import software.bernie.geckolib3.GeckoLib;
  **/
 @Mod(SnakerBone.MODID)
 public class SnakerBone {
-
     public static final String MODID = "snakerbone";
     public static final Logger LOGGER = LogManager.getLogger();
 
     public SnakerBone() {
-
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        bus.addListener(SnakerBoneShaders::register);
-
         GeckoLib.initialize();
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SnakerBoneCommonConfig.configSpec, "snakerbone-common.toml");
-
-        SnakerBoneEntityRegistry.SB_ENTITIES.register(bus);
-
-        SnakerBoneContentRegistry.SB_ITEMS.register(bus);
-        SnakerBoneContentRegistry.SB_BLOCKS.register(bus);
-        SnakerBoneContentRegistry.SB_BLOCK_ENTITIES.register(bus);
-        SnakerBoneContentRegistry.SB_SOUND_EVENTS.register(bus);
-        SnakerBoneWorldGenRegistry.SB_BIOMES.register(bus);
-
-        SnakerBoneWorldGenRegistry.registerBiomes();
-
-        MinecraftForge.EVENT_BUS.register(new SnakerBoneUtilities());
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.configSpec, "snakerbone-common.toml");
+        ContentRegistry.SB_ITEMS.register(bus);
+        ContentRegistry.SB_BLOCKS.register(bus);
+        ContentRegistry.SB_BLOCK_ENTITIES.register(bus);
+        ContentRegistry.SB_SOUND_EVENTS.register(bus);
+        ContentRegistry.SB_LOOT_MODIFIERS.register(bus);
+        EntityRegistry.SB_ENTITIES.register(bus);
+        WorldGenRegistry.SB_BIOMES.register(bus);
+//        SnakerBoneWorldGenRegistry.registerBiomes();
+        bus.addListener(Shaders::register);
+        MinecraftForge.EVENT_BUS.register(new Utilities());
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    public static final CreativeModeTab SNAKERBONE_ITEMS = new CreativeModeTab(SnakerBoneRegistries.SNAKERBONE_ITEMS) {
-
+    public static final CreativeModeTab SNAKERBONE_ITEMS = new CreativeModeTab(RegistryContants.SNAKERBONE_ITEMS) {
         @Override
         public ItemStack makeIcon() {
-
-            return new ItemStack(SnakerBoneContentRegistry.ENTITY_KILLER.get());
-
+            return new ItemStack(ContentRegistry.ENTITY_KILLER.get());
         }
     };
-
-    public static final CreativeModeTab SNAKERBONE_BLOCKS = new CreativeModeTab(SnakerBoneRegistries.SNAKERBONE_BLOCKS) {
-
+    public static final CreativeModeTab SNAKERBONE_BLOCKS = new CreativeModeTab(RegistryContants.SNAKERBONE_BLOCKS) {
         @Override
         public ItemStack makeIcon() {
-
-            return new ItemStack(SnakerBoneContentRegistry.SNOW_BLOCK.get());
-
+            return new ItemStack(ContentRegistry.SNOW_BLOCK.get());
         }
     };
-
-    public static final CreativeModeTab SNAKERBONE_MOBS = new CreativeModeTab(SnakerBoneRegistries.SNAKERBONE_MOBS) {
-
+    public static final CreativeModeTab SNAKERBONE_MOBS = new CreativeModeTab(RegistryContants.SNAKERBONE_MOBS) {
         @Override
         public ItemStack makeIcon() {
-
-            return new ItemStack(SnakerBoneContentRegistry.COSMO_SPAWN_EGG.get());
-
+            return new ItemStack(ContentRegistry.COSMO_SPAWN_EGG.get());
         }
     };
 }

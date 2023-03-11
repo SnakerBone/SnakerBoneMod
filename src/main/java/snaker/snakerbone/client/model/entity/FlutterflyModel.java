@@ -11,22 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class FlutterflyModel extends AnimatedGeoModel<Flutterfly> {
     @Override
     public ResourceLocation getModelResource(Flutterfly entity) {
-
         return new SnakerBoneResourceLocation("geo/flutterfly.geo.json");
-
     }
 
     @Override
     public ResourceLocation getTextureResource(Flutterfly entity) {
-
         return new SnakerBoneResourceLocation("textures/entity/creature/flutterfly.png");
-
     }
 
     @Override
     public ResourceLocation getAnimationResource(Flutterfly entity) {
-
         return new SnakerBoneResourceLocation("animations/flutterfly.animation.json");
-
     }
 }

@@ -11,22 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class SwirlBlockModel extends AnimatedGeoModel<SwirlBlockEntity> {
     @Override
     public ResourceLocation getModelResource(SwirlBlockEntity block) {
-
         return SnakerBoneResourceLocation.BLOCK_GEO_LOCATION;
-
     }
 
     @Override
     public ResourceLocation getTextureResource(SwirlBlockEntity block) {
-
         return SnakerBoneResourceLocation.BLACK_TEX_LOCATION;
-
     }
 
     @Override
     public ResourceLocation getAnimationResource(SwirlBlockEntity block) {
-
         return SnakerBoneResourceLocation.DUMMY_ANIM_LOCATION;
-
     }
 }

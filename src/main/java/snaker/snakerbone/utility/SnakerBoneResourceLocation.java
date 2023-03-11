@@ -15,8 +15,6 @@ public class SnakerBoneResourceLocation extends ResourceLocation {
     public static SnakerBoneResourceLocation DUMMY_ANIM_LOCATION = new SnakerBoneResourceLocation("animations/dummy.animation.json");
 
     public SnakerBoneResourceLocation(String path) {
-
         super(SnakerBone.MODID, path);
-
     }
 }

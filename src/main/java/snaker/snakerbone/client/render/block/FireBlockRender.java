@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerbone.block.blockentity.FireBlockEntity;
-import snaker.snakerbone.client.SnakerBoneShaders;
+import snaker.snakerbone.client.Shaders;
 import snaker.snakerbone.client.model.block.FireBlockModel;
 import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
 
@@ -17,15 +17,11 @@ import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
  **/
 public class FireBlockRender extends GeoBlockRenderer<FireBlockEntity> {
     public FireBlockRender(BlockEntityRendererProvider.Context context) {
-
         super(context, new FireBlockModel());
-
     }
 
     @Override
     public RenderType getRenderType(FireBlockEntity block, float partialTick, PoseStack stack, @Nullable MultiBufferSource source, @Nullable VertexConsumer buffer, int packedLight, ResourceLocation texture) {
-
-        return SnakerBoneShaders.BFIRE;
-
+        return Shaders.BFIRE;
     }
 }

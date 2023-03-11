@@ -8,52 +8,38 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import snaker.snakerbone.config.SnakerBoneCommonConfig;
+import snaker.snakerbone.config.CommonConfig;
 
 import java.util.List;
 
 /**
  * Created by SnakerBone on 28/02/2023
  **/
-public class SnakerBoneSwitchPlayerGameModeGoal extends Goal {
+public class SwitchPlayerGameModeGoal extends Goal {
     private final Mob mob;
 
-    public SnakerBoneSwitchPlayerGameModeGoal(Mob owner) {
-
+    public SwitchPlayerGameModeGoal(Mob owner) {
         mob = owner;
-
     }
 
     @Override
     public void tick() {
-
         Level world = mob.level;
-
         List<ServerPlayer> players = world.getEntitiesOfClass(ServerPlayer.class, mob.getBoundingBox().inflate(8));
-
         if (players.stream().anyMatch(ServerPlayer::isCreative)) {
-
             Component text = Component.translatable("status.snakerbone.creative_player_hurt_mob");
-
             for (ServerPlayer player : players) {
-
                 player.setGameMode(GameType.SURVIVAL);
-
                 mob.setTarget(player);
-
                 player.displayClientMessage(text, true);
-
                 player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50, 2));
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 50, 10));
-
             }
         }
     }
 
     @Override
     public boolean canUse() {
-
-        return SnakerBoneCommonConfig.playerVulnerableInCreative.get() && mob.getLastHurtByMob() instanceof ServerPlayer;
-
+        return CommonConfig.playerVulnerableInCreative.get() && mob.getLastHurtByMob() instanceof ServerPlayer;
     }
 }

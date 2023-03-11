@@ -1,9 +1,6 @@
-package snaker.snakerbone.block.blockentity;
+package snaker.snakerbone.item;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import snaker.snakerbone.registry.ContentRegistry;
+import net.minecraft.world.item.Item;
 import snaker.snakerbone.utility.Utilities;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -12,11 +9,11 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 /**
- * Created by SnakerBone on 22/02/2023
+ * Created by SnakerBone on 11/03/2023
  **/
-public class SnowBlockEntity extends BlockEntity implements IAnimatable {
-    public SnowBlockEntity(BlockPos pos, BlockState state) {
-        super(ContentRegistry.SNOW_BE.get(), pos, state);
+public class CosmoSpine extends Item implements IAnimatable {
+    public CosmoSpine(Properties properties) {
+        super(properties);
     }
 
     @Override

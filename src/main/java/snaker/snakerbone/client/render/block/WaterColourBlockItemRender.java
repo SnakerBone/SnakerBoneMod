@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerbone.block.blockitem.WaterColourBlockItem;
-import snaker.snakerbone.client.SnakerBoneShaders;
+import snaker.snakerbone.client.Shaders;
 import snaker.snakerbone.client.model.block.WaterColourBlockItemModel;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
@@ -16,15 +16,11 @@ import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
  **/
 public class WaterColourBlockItemRender extends GeoItemRenderer<WaterColourBlockItem> {
     public WaterColourBlockItemRender() {
-
         super(new WaterColourBlockItemModel());
-
     }
 
     @Override
     public RenderType getRenderType(WaterColourBlockItem animatable, float partialTick, PoseStack poseStack, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, ResourceLocation texture) {
-
-        return SnakerBoneShaders.BWATERCOLOUR;
-
+        return Shaders.BWATERCOLOUR;
     }
 }

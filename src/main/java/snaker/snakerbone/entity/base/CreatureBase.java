@@ -8,18 +8,15 @@ import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import snaker.snakerbone.data.SnakerBoneAttributes;
+import snaker.snakerbone.data.AttributeConstants;
 
 /**
  * Created by SnakerBone on 2/01/2023
  **/
 public class CreatureBase extends PathfinderMob {
     public CreatureBase(EntityType<? extends PathfinderMob> type, Level world) {
-
         super(type, world);
-
-        xpReward = SnakerBoneAttributes.CREATURE_XP_REWARD;
-
+        xpReward = AttributeConstants.CREATURE_XP_REWARD;
     }
 
     @Override

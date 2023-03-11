@@ -3,7 +3,7 @@ package snaker.snakerbone.data;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class SnakerBoneAttributes {
+public class AttributeConstants {
 
     /**
      * Base

@@ -11,22 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class CosmoModel extends AnimatedGeoModel<Cosmo> {
     @Override
     public ResourceLocation getModelResource(Cosmo object) {
-
         return new SnakerBoneResourceLocation("geo/cosmo.geo.json");
-
     }
 
     @Override
     public ResourceLocation getTextureResource(Cosmo object) {
-
         return SnakerBoneResourceLocation.BLACK_TEX_LOCATION;
-
     }
 
     @Override
     public ResourceLocation getAnimationResource(Cosmo animatable) {
-
         return new SnakerBoneResourceLocation("animations/cosmo.animation.json");
-
     }
 }

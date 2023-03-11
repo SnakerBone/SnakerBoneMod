@@ -11,22 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class FireBlockItemModel extends AnimatedGeoModel<FireBlockItem> {
     @Override
     public ResourceLocation getModelResource(FireBlockItem item) {
-
         return SnakerBoneResourceLocation.BLOCK_GEO_LOCATION;
-
     }
 
     @Override
     public ResourceLocation getTextureResource(FireBlockItem item) {
-
         return SnakerBoneResourceLocation.BLACK_TEX_LOCATION;
-
     }
 
     @Override
     public ResourceLocation getAnimationResource(FireBlockItem item) {
-
         return SnakerBoneResourceLocation.DUMMY_ANIM_LOCATION;
-
     }
 }

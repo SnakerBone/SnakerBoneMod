@@ -25,10 +25,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
-import snaker.snakerbone.data.SnakerBoneAttributes;
+import snaker.snakerbone.data.AttributeConstants;
 import snaker.snakerbone.entity.base.FlyingCreatureBase;
-import snaker.snakerbone.registry.SnakerBoneContentRegistry;
-import snaker.snakerbone.registry.SnakerBoneEntityRegistry;
+import snaker.snakerbone.registry.ContentRegistry;
+import snaker.snakerbone.registry.EntityRegistry;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -48,93 +48,70 @@ public class Flutterfly extends FlyingCreatureBase implements IAnimatable {
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
     public Flutterfly(EntityType<? extends FlyingCreatureBase> type, Level world) {
-
         super(type, world);
-
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> entity) {
-
         entity.getController().setAnimation(new AnimationBuilder().addAnimation("animation.flutterfly.fly", ILoopType.EDefaultLoopTypes.LOOP));
-
         return PlayState.CONTINUE;
     }
 
     public static boolean spawnRules(EntityType<Flutterfly> type, ServerLevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
-
         return true;
-
     }
 
     public static AttributeSupplier attributes() {
         return Animal.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, SnakerBoneAttributes.FLUTTERFLY_HEALTH)
-                .add(Attributes.MOVEMENT_SPEED, SnakerBoneAttributes.MOVEMENT_SPEED)
-                .add(Attributes.FLYING_SPEED, SnakerBoneAttributes.FLYING_SPEED).build();
+                .add(Attributes.MAX_HEALTH, AttributeConstants.FLUTTERFLY_HEALTH)
+                .add(Attributes.MOVEMENT_SPEED, AttributeConstants.MOVEMENT_SPEED)
+                .add(Attributes.FLYING_SPEED, AttributeConstants.FLYING_SPEED).build();
     }
 
     @Override
     protected void registerGoals() {
-
         super.registerGoals();
         goalSelector.addGoal(3, new BreedGoal(this, 1));
         goalSelector.addGoal(4, new TemptGoal(this, 1.25, Ingredient.of(ItemTags.FLOWERS), false));
         goalSelector.addGoal(6, new AvoidEntityGoal<>(this, Spider.class, 6f, 1D, 1.2D));
         goalSelector.addGoal(6, new AvoidEntityGoal<>(this, Parrot.class, 6f, 1D, 1.2D));
-
     }
 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-
-        return SnakerBoneContentRegistry.FLUTTERFLY_AMBIENT.get();
-
+        return ContentRegistry.FLUTTERFLY_AMBIENT.get();
     }
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-
         ItemStack stack = player.getItemInHand(hand);
-
         isFood(stack);
-
         return super.mobInteract(player, hand);
     }
 
     @Nullable
     @Override
     public Flutterfly getBreedOffspring(@Nullable ServerLevel server, @Nullable AgeableMob mate) {
-
-        return SnakerBoneEntityRegistry.FLUTTERFLY.get().create(server);
-
+        return EntityRegistry.FLUTTERFLY.get().create(server);
     }
 
     @Override
     public boolean isFood(ItemStack stack) {
-
         return stack.is(ItemTags.FLOWERS);
-
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-
         data.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
-
     }
 
     @Override
     public AnimationFactory getFactory() {
-
         return FACTORY;
-
     }
 
     @Override
     public Packet<?> getAddEntityPacket() {
-
         return NetworkHooks.getEntitySpawningPacket(this);
-
     }
 }

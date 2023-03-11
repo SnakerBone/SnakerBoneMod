@@ -10,57 +10,45 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import snaker.snakerbone.data.SnakerBoneAttributes;
-import snaker.snakerbone.entity.ai.SnakerBoneFlyingControl;
-import snaker.snakerbone.entity.ai.SnakerBoneLookAroundGoal;
-import snaker.snakerbone.entity.ai.SnakerBoneRandomFlyGoal;
-import snaker.snakerbone.entity.ai.SnakerBoneSwitchPlayerGameModeGoal;
+import snaker.snakerbone.data.AttributeConstants;
+import snaker.snakerbone.entity.ai.FlyControl;
+import snaker.snakerbone.entity.ai.LookAroundGoal;
+import snaker.snakerbone.entity.ai.RandomFlyGoal;
+import snaker.snakerbone.entity.ai.SwitchPlayerGameModeGoal;
 
 /**
  * Created by SnakerBone on 2/01/2023
  **/
 public class FlyingMobBase extends FlyingMob implements Enemy {
     protected FlyingMobBase(EntityType<? extends FlyingMobBase> type, Level world) {
-
         super(type, world);
-
-        moveControl = new SnakerBoneFlyingControl(this);
-
-        xpReward = SnakerBoneAttributes.MOB_XP_REWARD;
-
+        moveControl = new FlyControl(this);
+        xpReward = AttributeConstants.MOB_XP_REWARD;
     }
 
     @Override
     protected boolean shouldDespawnInPeaceful() {
-
         return true;
-
     }
 
     @Override
     public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
-
         return false;
-
     }
 
     @Override
     protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
-
-
     }
 
     @Override
     public boolean onClimbable() {
-
         return false;
-
     }
 
     protected void registerGoals() {
-        goalSelector.addGoal(4, new SnakerBoneRandomFlyGoal(this));
-        goalSelector.addGoal(6, new SnakerBoneLookAroundGoal(this));
-        goalSelector.addGoal(1, new SnakerBoneSwitchPlayerGameModeGoal(this));
+        goalSelector.addGoal(4, new RandomFlyGoal(this));
+        goalSelector.addGoal(6, new LookAroundGoal(this));
+        goalSelector.addGoal(1, new SwitchPlayerGameModeGoal(this));
         goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6));
         targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }

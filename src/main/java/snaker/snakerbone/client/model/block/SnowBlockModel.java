@@ -11,22 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class SnowBlockModel extends AnimatedGeoModel<SnowBlockEntity> {
     @Override
     public ResourceLocation getModelResource(SnowBlockEntity block) {
-
         return SnakerBoneResourceLocation.BLOCK_GEO_LOCATION;
-
     }
 
     @Override
     public ResourceLocation getTextureResource(SnowBlockEntity block) {
-
         return SnakerBoneResourceLocation.BLACK_TEX_LOCATION;
-
     }
 
     @Override
     public ResourceLocation getAnimationResource(SnowBlockEntity block) {
-
         return SnakerBoneResourceLocation.DUMMY_ANIM_LOCATION;
-
     }
 }

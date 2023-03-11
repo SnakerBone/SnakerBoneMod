@@ -10,8 +10,6 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
  **/
 public class UtterflyRender extends GeoEntityRenderer<Utterfly> {
     public UtterflyRender(EntityRendererProvider.Context renderManager) {
-
         super(renderManager, new UtterflyModel());
-
     }
 }

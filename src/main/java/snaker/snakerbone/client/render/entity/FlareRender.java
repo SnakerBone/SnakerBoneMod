@@ -11,10 +11,7 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
  **/
 public class FlareRender extends GeoEntityRenderer<Flare> {
     public FlareRender(EntityRendererProvider.Context renderManager) {
-
         super(renderManager, new FlareModel());
-
         addLayer(new FlareLayer(this));
-
     }
 }

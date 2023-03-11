@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerbone.block.blockentity.StarsBlockEntity;
-import snaker.snakerbone.client.SnakerBoneShaders;
+import snaker.snakerbone.client.Shaders;
 import snaker.snakerbone.client.model.block.StarsBlockModel;
 import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
 
@@ -17,15 +17,11 @@ import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
  **/
 public class StarsBlockRender extends GeoBlockRenderer<StarsBlockEntity> {
     public StarsBlockRender(BlockEntityRendererProvider.Context rendererProvider) {
-
         super(rendererProvider, new StarsBlockModel());
-
     }
 
     @Override
     public RenderType getRenderType(StarsBlockEntity block, float partialTick, PoseStack stack, @Nullable MultiBufferSource source, @Nullable VertexConsumer buffer, int packedLight, ResourceLocation texture) {
-
-        return SnakerBoneShaders.BSTARS;
-
+        return Shaders.BSTARS;
     }
 }

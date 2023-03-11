@@ -11,15 +11,11 @@ import snaker.snakerbone.utility.SnakerBoneResourceLocation;
  **/
 public class ExplosiveHommingArrowRender extends ArrowRenderer<ExplosiveHommingArrow> {
     public ExplosiveHommingArrowRender(EntityRendererProvider.Context context) {
-
         super(context);
-
     }
 
     @Override
     public ResourceLocation getTextureLocation(ExplosiveHommingArrow entity) {
-
         return new SnakerBoneResourceLocation("textures/entity/projectile/homming_arrow.png");
-
     }
 }

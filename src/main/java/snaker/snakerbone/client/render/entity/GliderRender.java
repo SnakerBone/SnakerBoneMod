@@ -17,20 +17,14 @@ import javax.annotation.Nullable;
  **/
 public class GliderRender extends GeoEntityRenderer<Glider> {
     public GliderRender(EntityRendererProvider.Context renderManager) {
-
         super(renderManager, new GliderModel());
-
     }
 
     @Override
     public RenderType getRenderType(Glider entity, float pt, PoseStack stack, @Nullable MultiBufferSource source, @Nullable VertexConsumer buffer, int light, ResourceLocation location) {
-
         if (entity.isBaby()) {
-
             stack.scale(0.5F, 0.5F, 0.5F);
-
         }
-
         return super.getRenderType(entity, pt, stack, source, buffer, light, location);
     }
 }

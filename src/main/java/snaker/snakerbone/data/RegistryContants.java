@@ -3,7 +3,7 @@ package snaker.snakerbone.data;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class SnakerBoneRegistries {
+public class RegistryContants {
 
     /**
      * Entities
@@ -60,7 +60,7 @@ public class SnakerBoneRegistries {
      **/
     public static final String ENTITY_KILLER = "entity_killer";
     public static final String FACTORIAL_SWORD = "factorial_sword";
-    public static final String LANCE = "lance";
+    public static final String COSMO_SPINE = "cosmo_spine";
 
     /**
      * Sound events
@@ -87,12 +87,7 @@ public class SnakerBoneRegistries {
     public static final String SHADER_PLAINS = "shader_plains";
 
     /**
-     * Dimensions
+     * Loot Modifiers
      **/
-    public static final String SHADERDIM = "shaderdim";
-
-    /**
-     * Surface Builders
-     **/
-    public static final String SHADER_HILLS_CSB = "shader_hills_csb";
+    public static final String ADD_LOOT = "add_loot";
 }

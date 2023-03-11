@@ -10,8 +10,6 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
  **/
 public class SnipeRender extends GeoEntityRenderer<Snipe> {
     public SnipeRender(EntityRendererProvider.Context renderManager) {
-
         super(renderManager, new SnipeModel());
-
     }
 }
