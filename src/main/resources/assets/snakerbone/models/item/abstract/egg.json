@@ -1,5 +1,5 @@
 {
-  "parent": "snakerbone:item/base",
+  "parent": "snakerbone:item/abstract/custom",
   "textures": {
     "layer0": "item/spawn_egg",
     "layer1": "item/spawn_egg_overlay"

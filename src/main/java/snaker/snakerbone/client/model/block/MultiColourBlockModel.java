@@ -2,7 +2,7 @@ package snaker.snakerbone.client.model.block;
 
 import net.minecraft.resources.ResourceLocation;
 import snaker.snakerbone.block.blockentity.MultiColourBlockEntity;
-import snaker.snakerbone.utility.SnakerBoneResourceLocation;
+import snaker.snakerbone.utility.Utilities;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 /**
@@ -11,16 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class MultiColourBlockModel extends AnimatedGeoModel<MultiColourBlockEntity> {
     @Override
     public ResourceLocation getModelResource(MultiColourBlockEntity block) {
-        return SnakerBoneResourceLocation.BLOCK_GEO_LOCATION;
+        return Utilities.blockModel();
     }
 
     @Override
     public ResourceLocation getTextureResource(MultiColourBlockEntity block) {
-        return SnakerBoneResourceLocation.BLACK_TEX_LOCATION;
+        return Utilities.soildTexture();
     }
 
     @Override
     public ResourceLocation getAnimationResource(MultiColourBlockEntity block) {
-        return SnakerBoneResourceLocation.DUMMY_ANIM_LOCATION;
+        return Utilities.noAnimation();
     }
 }

@@ -59,8 +59,14 @@ public class RegistryContants {
      * Items
      **/
     public static final String ENTITY_KILLER = "entity_killer";
-    public static final String FACTORIAL_SWORD = "factorial_sword";
-    public static final String COSMO_SPINE = "cosmo_spine";
+    public static final String ADDITORIAL_SWORD = "additorial_sword";
+    public static final String COSMO_SPINE_RED = "cosmo_spine_red";
+    public static final String COSMO_SPINE_GREEN = "cosmo_spine_green";
+    public static final String COSMO_SPINE_BLUE = "cosmo_spine_blue";
+    public static final String COSMO_SPINE_YELLOW = "cosmo_spine_yellow";
+    public static final String COSMO_SPINE_PINK = "cosmo_spine_pink";
+    public static final String COSMO_SPINE_PURPLE = "cosmo_spine_purple";
+    public static final String COSMO_SPINE_ALPHA = "cosmo_spine_alpha";
 
     /**
      * Sound events

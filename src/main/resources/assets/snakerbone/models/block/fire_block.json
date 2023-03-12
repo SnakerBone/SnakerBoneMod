@@ -1,6 +1,3 @@
 {
-  "parent": "snakerbone:block/base",
-  "textures": {
-    "particle": "block/light_blue_concrete"
-  }
+  "parent": "snakerbone:block/abstract/shader"
 }

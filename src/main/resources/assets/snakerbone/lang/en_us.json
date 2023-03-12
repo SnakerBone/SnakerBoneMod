@@ -6,16 +6,25 @@
   "item.snakerbone.flutterfly_spawn_egg": "Flutterfly Spawn Egg",
   "item.snakerbone.utterfly_spawn_egg": "Utterfly Spawn Egg",
   "item.snakerbone.entity_killer": "Entity Killer",
-  "item.snakerbone.factorial_sword": "Factorial Sword",
+  "item.snakerbone.cosmo_spine_red": "Red Cosmo Spine",
+  "item.snakerbone.cosmo_spine_green": "Green Cosmo Spine",
+  "item.snakerbone.cosmo_spine_blue": "Blue Cosmo Spine",
+  "item.snakerbone.cosmo_spine_yellow": "Yellow Cosmo Spine",
+  "item.snakerbone.cosmo_spine_pink": "Pink Cosmo Spine",
+  "item.snakerbone.cosmo_spine_purple": "Purple Cosmo Spine",
+  "item.snakerbone.cosmo_spine_alpha": "Alpha Cosmo Spine",
+
   "block.snakerbone.swirl_block": "Swirl Shader Block",
   "block.snakerbone.snow_block": "Snow Shader Block",
   "block.snakerbone.stars_block": "Star Shader Block",
   "block.snakerbone.watercolour_block": "WaterColour Shader Block",
   "block.snakerbone.multicolour_block": "MultiColour Shader Block",
   "block.snakerbone.fire_block": "Fire Shader Block",
+
   "itemGroup.snakerbone_items": "SnakerBone Items",
   "itemGroup.snakerbone_blocks": "SnakerBone Blocks",
   "itemGroup.snakerbone_mobs": "SnakerBone Mobs",
+
   "entity.snakerbone.cosmo": "Cosmo",
   "entity.snakerbone.alpha_cosmo": "Alpha Cosmo",
   "entity.snakerbone.snipe": "Snipe",
@@ -26,5 +35,6 @@
   "entity.snakerbone.explosive_homming_bullet": "Explosive Homming Arrow",
   "entity.snakerbone.homming_bullet": "Homming Arrow",
   "entity.snakerbone.laser": "Laser",
+
   "status.snakerbone.creative_player_hurt_mob": "§4You have angered this mob. You are now vulnerable"
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "snakerbone:item/abstract/obj",
+  "loader": "forge:obj",
+  "flip_v": true,
+  "emissive_ambient": false,
+  "model": "snakerbone:models/item/blender/additorial_sword.obj"
+}

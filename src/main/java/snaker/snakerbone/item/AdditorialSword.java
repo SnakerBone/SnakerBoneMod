@@ -9,14 +9,14 @@ import snaker.snakerbone.utility.AttackTypes;
 /**
  * Created by SnakerBone on 8/03/2023
  **/
-public class FactorialSword extends SwordItem {
-    public FactorialSword(Tier tier, int damageModifier, float speedModifier, Properties properties) {
+public class AdditorialSword extends SwordItem {
+    public AdditorialSword(Tier tier, int damageModifier, float speedModifier, Properties properties) {
         super(tier, damageModifier, speedModifier, properties);
     }
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-        AttackTypes.factorialAttackAOE(entity);
+        AttackTypes.additorialAOE(entity);
         return super.onEntitySwing(stack, entity);
     }
 }

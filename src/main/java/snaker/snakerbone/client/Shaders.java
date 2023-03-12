@@ -77,8 +77,44 @@ public class Shaders {
     public static CCUniform blurFogRGB;
     public static CCUniform blurFogAlpha;
 
-    public static RenderType ISTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.TRIANGLES, 256, RenderType.CompositeState.builder()
+    public static RenderType ISTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
             .setShaderState(new ShaderStateShard(() -> stars))
+            .setLightmapState(LIGHTMAP)
+            .setCullState(NO_CULL)
+            .setOverlayState(OVERLAY)
+            .createCompositeState(false));
+    public static RenderType IREDSTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+            .setShaderState(new ShaderStateShard(() -> redStars))
+            .setLightmapState(LIGHTMAP)
+            .setCullState(NO_CULL)
+            .setOverlayState(OVERLAY)
+            .createCompositeState(false));
+    public static RenderType IGREENSTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+            .setShaderState(new ShaderStateShard(() -> greenStars))
+            .setLightmapState(LIGHTMAP)
+            .setCullState(NO_CULL)
+            .setOverlayState(OVERLAY)
+            .createCompositeState(false));
+    public static RenderType IBLUESTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+            .setShaderState(new ShaderStateShard(() -> blueStars))
+            .setLightmapState(LIGHTMAP)
+            .setCullState(NO_CULL)
+            .setOverlayState(OVERLAY)
+            .createCompositeState(false));
+    public static RenderType IYELLOWSTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+            .setShaderState(new ShaderStateShard(() -> yellowStars))
+            .setLightmapState(LIGHTMAP)
+            .setCullState(NO_CULL)
+            .setOverlayState(OVERLAY)
+            .createCompositeState(false));
+    public static RenderType IPINKSTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+            .setShaderState(new ShaderStateShard(() -> pinkStars))
+            .setLightmapState(LIGHTMAP)
+            .setCullState(NO_CULL)
+            .setOverlayState(OVERLAY)
+            .createCompositeState(false));
+    public static RenderType IPURPLESTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+            .setShaderState(new ShaderStateShard(() -> purpleStars))
             .setLightmapState(LIGHTMAP)
             .setCullState(NO_CULL)
             .setOverlayState(OVERLAY)
@@ -143,37 +179,37 @@ public class Shaders {
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType ERED_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+    public static RenderType EREDSTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
             .setShaderState(new ShaderStateShard(() -> redStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EGREEN_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+    public static RenderType EGREENSTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
             .setShaderState(new ShaderStateShard(() -> greenStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EBLUE_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+    public static RenderType EBLUESTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
             .setShaderState(new ShaderStateShard(() -> blueStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EYELLOW_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+    public static RenderType EYELLOWSTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
             .setShaderState(new ShaderStateShard(() -> yellowStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EPINK_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+    public static RenderType EPINKSTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
             .setShaderState(new ShaderStateShard(() -> pinkStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EPURPLE_STARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+    public static RenderType EPURPLESTARS = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
             .setShaderState(new ShaderStateShard(() -> purpleStars))
             .setCullState(NO_CULL)
             .setDepthTestState(EQUAL_DEPTH_TEST)
@@ -185,7 +221,7 @@ public class Shaders {
             .setDepthTestState(EQUAL_DEPTH_TEST)
             .setLightmapState(LIGHTMAP)
             .createCompositeState(false));
-    public static RenderType EBLUR_FOG = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
+    public static RenderType EBLURFOG = RenderType.create(RANDOM_PLACEHOLDER, DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.QUADS, 256, RenderType.CompositeState.builder()
             .setShaderState(new ShaderStateShard(() -> blurFog))
             .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
             .setLightmapState(LIGHTMAP)

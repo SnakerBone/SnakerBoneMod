@@ -1,14 +1,14 @@
 package snaker.snakerbone.utility;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.apache.commons.lang3.RandomStringUtils;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.Random;
 
@@ -59,17 +59,34 @@ public class Utilities {
     }
 
     /**
-     * Helper function
+     * Registers a fresh loot table
      **/
-    public static <E extends IAnimatable> PlayState noAnimation(AnimationEvent<E> entity) {
+    public static ResourceLocation registerLootTable(String path) {
+        return BuiltInLootTables.register(new SnakerBoneResourceLocation(path));
+    }
+
+    public static <E extends IAnimatable> PlayState noPlaystate(AnimationEvent<E> entity) {
         return PlayState.CONTINUE;
     }
 
-    /**
-     * Helper function
-     **/
-    public static AnimationFactory createFactory(IAnimatable animatable) {
-        return GeckoLibUtil.createFactory(animatable);
+    public static ResourceLocation noModel() {
+        return new SnakerBoneResourceLocation("geo/nil.geo.json");
+    }
+
+    public static ResourceLocation noAnimation() {
+        return new SnakerBoneResourceLocation("geo/nil.geo.json");
+    }
+
+    public static ResourceLocation noTexture() {
+        return new SnakerBoneResourceLocation("textures/clear.png");
+    }
+
+    public static ResourceLocation soildTexture() {
+        return new SnakerBoneResourceLocation("textures/solid.png");
+    }
+
+    public static ResourceLocation blockModel() {
+        return new SnakerBoneResourceLocation("geo/block.geo.json");
     }
 
     /**

@@ -3,6 +3,7 @@ package snaker.snakerbone.client.model.entity;
 import net.minecraft.resources.ResourceLocation;
 import snaker.snakerbone.entity.mob.Cosmo;
 import snaker.snakerbone.utility.SnakerBoneResourceLocation;
+import snaker.snakerbone.utility.Utilities;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 /**
@@ -16,7 +17,7 @@ public class CosmoModel extends AnimatedGeoModel<Cosmo> {
 
     @Override
     public ResourceLocation getTextureResource(Cosmo object) {
-        return SnakerBoneResourceLocation.BLACK_TEX_LOCATION;
+        return Utilities.soildTexture();
     }
 
     @Override

@@ -2,7 +2,7 @@ package snaker.snakerbone.client.model.block;
 
 import net.minecraft.resources.ResourceLocation;
 import snaker.snakerbone.block.blockitem.FireBlockItem;
-import snaker.snakerbone.utility.SnakerBoneResourceLocation;
+import snaker.snakerbone.utility.Utilities;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 /**
@@ -11,16 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class FireBlockItemModel extends AnimatedGeoModel<FireBlockItem> {
     @Override
     public ResourceLocation getModelResource(FireBlockItem item) {
-        return SnakerBoneResourceLocation.BLOCK_GEO_LOCATION;
+        return Utilities.blockModel();
     }
 
     @Override
     public ResourceLocation getTextureResource(FireBlockItem item) {
-        return SnakerBoneResourceLocation.BLACK_TEX_LOCATION;
+        return Utilities.soildTexture();
     }
 
     @Override
     public ResourceLocation getAnimationResource(FireBlockItem item) {
-        return SnakerBoneResourceLocation.DUMMY_ANIM_LOCATION;
+        return Utilities.noAnimation();
     }
 }

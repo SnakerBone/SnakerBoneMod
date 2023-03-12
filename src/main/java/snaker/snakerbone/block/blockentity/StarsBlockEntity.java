@@ -21,7 +21,7 @@ public class StarsBlockEntity extends BlockEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 0, Utilities::noAnimation));
+        data.addAnimationController(new AnimationController<>(this, "controller", 0, Utilities::noPlaystate));
     }
 
     @Override

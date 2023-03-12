@@ -1,4 +1,5 @@
 {
+  "parent": "builtin/generated",
   "display": {
     "thirdperson_righthand": {
       "rotation": [93.25, 0, 0],

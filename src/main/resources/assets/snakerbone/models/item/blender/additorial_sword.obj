@@ -1,6 +1,6 @@
 # Blender 3.4.1
 # www.blender.org
-mtllib factorial_sword.mtl
+mtllib additorial_sword.mtl
 o blade
 v 0.011650 -0.053198 -0.060300
 v 0.011650 0.053198 -0.060300

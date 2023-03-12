@@ -2,7 +2,7 @@ package snaker.snakerbone.client.model.block;
 
 import net.minecraft.resources.ResourceLocation;
 import snaker.snakerbone.block.blockentity.SnowBlockEntity;
-import snaker.snakerbone.utility.SnakerBoneResourceLocation;
+import snaker.snakerbone.utility.Utilities;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 /**
@@ -11,16 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class SnowBlockModel extends AnimatedGeoModel<SnowBlockEntity> {
     @Override
     public ResourceLocation getModelResource(SnowBlockEntity block) {
-        return SnakerBoneResourceLocation.BLOCK_GEO_LOCATION;
+        return Utilities.blockModel();
     }
 
     @Override
     public ResourceLocation getTextureResource(SnowBlockEntity block) {
-        return SnakerBoneResourceLocation.BLACK_TEX_LOCATION;
+        return Utilities.soildTexture();
     }
 
     @Override
     public ResourceLocation getAnimationResource(SnowBlockEntity block) {
-        return SnakerBoneResourceLocation.DUMMY_ANIM_LOCATION;
+        return Utilities.noAnimation();
     }
 }

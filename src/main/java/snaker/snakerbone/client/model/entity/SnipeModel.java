@@ -3,6 +3,7 @@ package snaker.snakerbone.client.model.entity;
 import net.minecraft.resources.ResourceLocation;
 import snaker.snakerbone.entity.mob.Snipe;
 import snaker.snakerbone.utility.SnakerBoneResourceLocation;
+import snaker.snakerbone.utility.Utilities;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 /**
@@ -21,6 +22,6 @@ public class SnipeModel extends AnimatedGeoModel<Snipe> {
 
     @Override
     public ResourceLocation getAnimationResource(Snipe animatable) {
-        return SnakerBoneResourceLocation.DUMMY_ANIM_LOCATION;
+        return Utilities.noAnimation();
     }
 }

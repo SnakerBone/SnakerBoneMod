@@ -2,7 +2,7 @@ package snaker.snakerbone.client.model.entity;
 
 import net.minecraft.resources.ResourceLocation;
 import snaker.snakerbone.entity.projectile.Laser;
-import snaker.snakerbone.utility.SnakerBoneResourceLocation;
+import snaker.snakerbone.utility.Utilities;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 /**
@@ -11,16 +11,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class LaserModel extends AnimatedGeoModel<Laser> {
     @Override
     public ResourceLocation getModelResource(Laser entity) {
-        return SnakerBoneResourceLocation.DUMMY_GEO_LOCATION;
+        return Utilities.noModel();
     }
 
     @Override
     public ResourceLocation getTextureResource(Laser entity) {
-        return SnakerBoneResourceLocation.TRANSPARENT_TEX_LOCATION;
+        return Utilities.noTexture();
     }
 
     @Override
     public ResourceLocation getAnimationResource(Laser animatable) {
-        return SnakerBoneResourceLocation.DUMMY_ANIM_LOCATION;
+        return Utilities.noAnimation();
     }
 }

@@ -16,9 +16,9 @@ import snaker.snakerbone.block.*;
 import snaker.snakerbone.block.blockentity.*;
 import snaker.snakerbone.block.blockitem.*;
 import snaker.snakerbone.data.RegistryContants;
+import snaker.snakerbone.item.AdditorialSword;
 import snaker.snakerbone.item.CosmoSpine;
 import snaker.snakerbone.item.EntityKiller;
-import snaker.snakerbone.item.FactorialSword;
 import snaker.snakerbone.loot.LootModifiers;
 import snaker.snakerbone.utility.SnakerBoneResourceLocation;
 import snaker.snakerbone.utility.Utilities;
@@ -56,8 +56,14 @@ public class ContentRegistry {
      * Items
      **/
     public static final RegistryObject<Item> ENTITY_KILLER = SB_ITEMS.register(RegistryContants.ENTITY_KILLER, () -> new EntityKiller(new Item.Properties().stacksTo(1).tab(SNAKERBONE_ITEMS)));
-    public static final RegistryObject<Item> FACTORIAL_SWORD = SB_ITEMS.register(RegistryContants.FACTORIAL_SWORD, () -> new FactorialSword(Tiers.DIAMOND, 1, -2.4F, new Item.Properties().tab(SNAKERBONE_ITEMS)));
-    public static final RegistryObject<Item> COSMO_SPINE = SB_ITEMS.register(RegistryContants.COSMO_SPINE, () -> new CosmoSpine(new Item.Properties().tab(SNAKERBONE_ITEMS)));
+    public static final RegistryObject<Item> ADDITORIAL_SWORD = SB_ITEMS.register(RegistryContants.ADDITORIAL_SWORD, () -> new AdditorialSword(Tiers.DIAMOND, 1, -2.4F, new Item.Properties().tab(SNAKERBONE_ITEMS)));
+    public static final RegistryObject<Item> COSMO_SPINE_RED = SB_ITEMS.register(RegistryContants.COSMO_SPINE_RED, () -> new CosmoSpine.Red(new Item.Properties().tab(SNAKERBONE_ITEMS)));
+    public static final RegistryObject<Item> COSMO_SPINE_GREEN = SB_ITEMS.register(RegistryContants.COSMO_SPINE_GREEN, () -> new CosmoSpine.Green(new Item.Properties().tab(SNAKERBONE_ITEMS)));
+    public static final RegistryObject<Item> COSMO_SPINE_BLUE = SB_ITEMS.register(RegistryContants.COSMO_SPINE_BLUE, () -> new CosmoSpine.Blue(new Item.Properties().tab(SNAKERBONE_ITEMS)));
+    public static final RegistryObject<Item> COSMO_SPINE_YELLOW = SB_ITEMS.register(RegistryContants.COSMO_SPINE_YELLOW, () -> new CosmoSpine.Yellow(new Item.Properties().tab(SNAKERBONE_ITEMS)));
+    public static final RegistryObject<Item> COSMO_SPINE_PINK = SB_ITEMS.register(RegistryContants.COSMO_SPINE_PINK, () -> new CosmoSpine.Pink(new Item.Properties().tab(SNAKERBONE_ITEMS)));
+    public static final RegistryObject<Item> COSMO_SPINE_PURPLE = SB_ITEMS.register(RegistryContants.COSMO_SPINE_PURPLE, () -> new CosmoSpine.Purple(new Item.Properties().tab(SNAKERBONE_ITEMS)));
+    public static final RegistryObject<Item> COSMO_SPINE_ALPHA = SB_ITEMS.register(RegistryContants.COSMO_SPINE_ALPHA, () -> new CosmoSpine.Alpha(new Item.Properties().tab(SNAKERBONE_ITEMS)));
 
     /**
      * Block Items

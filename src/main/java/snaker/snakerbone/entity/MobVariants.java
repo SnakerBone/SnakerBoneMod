@@ -8,12 +8,12 @@ import java.util.Comparator;
  **/
 public class MobVariants {
     public enum Cosmo {
-        PURPLE(0),
-        RED(1),
-        GREEN(2),
-        BLUE(3),
-        YELLOW(4),
-        PINK(5),
+        RED(0),
+        GREEN(1),
+        BLUE(2),
+        YELLOW(3),
+        PINK(4),
+        PURPLE(5),
         ALPHA(6);
 
         private static final Cosmo[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(Cosmo::getId)).toArray(Cosmo[]::new);

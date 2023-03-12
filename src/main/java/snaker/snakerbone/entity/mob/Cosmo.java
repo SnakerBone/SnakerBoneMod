@@ -4,6 +4,7 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -46,6 +47,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
  **/
 public class Cosmo extends MobBase implements IAnimatable {
     private static final EntityDataAccessor<Integer> VARIANT_ID = SynchedEntityData.defineId(Cosmo.class, EntityDataSerializers.INT);
+
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
     public Cosmo(EntityType<? extends Monster> type, Level world) {
@@ -124,8 +126,27 @@ public class Cosmo extends MobBase implements IAnimatable {
     }
 
     @Override
+    public void dropCustomDeathLoot(DamageSource source, int looting, boolean wasHit) {
+        switch (getVariant().getId()) {
+            case 0 -> spawnAtLocation(ContentRegistry.COSMO_SPINE_RED.get());
+            case 1 -> spawnAtLocation(ContentRegistry.COSMO_SPINE_GREEN.get());
+            case 2 -> spawnAtLocation(ContentRegistry.COSMO_SPINE_BLUE.get());
+            case 3 -> spawnAtLocation(ContentRegistry.COSMO_SPINE_YELLOW.get());
+            case 4 -> spawnAtLocation(ContentRegistry.COSMO_SPINE_PINK.get());
+            case 5 -> spawnAtLocation(ContentRegistry.COSMO_SPINE_PURPLE.get());
+            case 6 -> spawnAtLocation(ContentRegistry.COSMO_SPINE_ALPHA.get());
+        }
+    }
+
+    @Override
     public boolean fireImmune() {
-        return getVariant().getId() == 1;
+        return getVariant().equals(MobVariants.Cosmo.RED);
+    }
+
+    @Override
+    public Component getName() {
+        Component name = Component.translatable("entity.snakerbone.alpha_cosmo");
+        return getVariant().equals(MobVariants.Cosmo.ALPHA) ? name : super.getName();
     }
 
     @Override
@@ -134,7 +155,7 @@ public class Cosmo extends MobBase implements IAnimatable {
         if (target == null) {
             return false;
         }
-        if (getVariant().getId() == 6) {
+        if (getVariant().equals(MobVariants.Cosmo.ALPHA)) {
             target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 25, 1));
             target.teleportTo(target.getRandomX(16), target.getY(), target.getRandomZ(16));
             level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.FOX_TELEPORT, SoundSource.BLOCKS, 1, 1);
